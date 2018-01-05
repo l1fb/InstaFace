@@ -13,20 +13,25 @@ const database = firebase.database();
 
 //exporting functions
 
-createUser((username, first_name, last_name, user_ID) => {
+createUser((username, first_name, last_name, user_ID) => { //create a new user into our '/users' collection
   //I: from CLIENT username, first_name, last_name, user_ID
-  //
+  database.ref('/users' + user_ID).update({
+      username: username,
+      first_name: first_name,
+      last_name: last_name,
+      user_ID: user_ID
+  });
 });
 
-createPhoto ((photo_URL, user_ID, caption) => {
+createPhoto ((photo_URL, user_ID, caption) => { //create a new photo to user reference to '/photos' collection
    // returns generated photo_ID
 });
 
-getUserID ((username) => {
+getUserID ((username) => { //fetches the 'username's unique 'user_ID' from '/users' collection
    // returns generated user_ID
 });
 
-addPhotoTags((photo_ID, tag_ID) => {
+addPhotoTags((photo_ID, tag_ID) => { //combines
 
 });
 
@@ -58,10 +63,11 @@ decreaseLike((photoURL) => {
 
 });
 
-getLike((photoURL) => {
+getLike((photoURL) => { //from '/photos' collection, return 'likes' value from 'photoURL' photo.
 //returns likes from DB 
 });
-createTag((face_ID) => {
+
+createTag((face_ID) => { //
 
 });
 
