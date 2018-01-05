@@ -66,8 +66,8 @@ getAllPhotos(() => {
 });
 
 increaseLike((photo_URL) => {
-  database.ref('/photos' + photo_URL).update({
-    likes: ++
+  database.ref('/photos' + photo_URL + likes).transaction((likes) => {
+    return likes ++;
   });
 });
 
@@ -91,4 +91,4 @@ addNameToTag((face_ID, first_name, last_name) => {
 
 });
 
-module.exports = {createUser, createPhoto};
+module.exports = {createUser, createPhoto, increaseLike};
