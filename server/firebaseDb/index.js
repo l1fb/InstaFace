@@ -72,7 +72,9 @@ increaseLike((photo_URL) => {
 });
 
 decreaseLike((photoURL) => {
-
+  database.ref('/photos' + photo_URL + likes).transaction((likes) => {
+    (!!likes) ? likes -- : null;
+  });
 });
 
 getLike((photo_URL) => { //from '/photos' collection, return 'likes' value from 'photoURL' photo.
