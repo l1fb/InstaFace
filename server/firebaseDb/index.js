@@ -24,7 +24,7 @@ createUser((username, first_name, last_name, user_ID) => { //create a new user i
   });
 });
 
-createPhoto ((photo_URL, user_ID, caption) => { //create a new photo to user reference to '/photos' collection
+createPhoto((photo_URL, user_ID, caption) => { //create a new photo to user reference to '/photos' collection
    // returns generated photo_ID
    database.ref('/photos' + photo_URL).update({
      photo_ID: photo_ID,
@@ -37,12 +37,19 @@ createPhoto ((photo_URL, user_ID, caption) => { //create a new photo to user ref
    });
 });
 
-getUserID ((username) => { //fetches the 'username's unique 'user_ID' from '/users' collection
-   // returns generated user_ID
+readData((path, callback) => {
+  database.ref(path).once('value').then(function(snapshot) {
+    callback(snapshot.val());
+  });
+});
+
+getUserID((username) => { //fetches the 'username's unique 'user_ID' from '/users' collection
+   // returns firebase generated user_ID
+   // why do we need this again?
 });
 
 addPhotoTags((photo_ID, tag_ID) => { //combines
-
+  //
 });
 
 getTagFromName((first_name) => {
@@ -79,6 +86,11 @@ decreaseLike((photoURL) => {
 
 getLike((photo_URL) => { //from '/photos' collection, return 'likes' value from 'photoURL' photo.
 //returns likes from DB 
+  let path = `/photos/${photo_URL}`;
+
+  readData(path, (photo) => {
+    return photo.likes; //returns the integer
+  });
 });
 
 createTag((face_ID) => { //
@@ -93,4 +105,4 @@ addNameToTag((face_ID, first_name, last_name) => {
 
 });
 
-module.exports = {createUser, createPhoto, increaseLike, decreaseLike};
+module.exports = {createUser, createPhoto, increaseLike, decreaseLike, getLike};
