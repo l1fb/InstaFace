@@ -14,7 +14,8 @@ const database = firebase.database();
 //exporting functions
 
 createUser((username, first_name, last_name, user_ID) => {
-
+  //I: from CLIENT username, first_name, last_name, user_ID
+  //
 });
 
 createPhoto ((photo_URL, user_ID, caption) => {
