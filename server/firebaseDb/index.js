@@ -11,6 +11,7 @@ firebase.initializeApp(CONFIG);
 //firebase database
 const database = firebase.database();
 
+
 //exporting functions
 
 createUser((username, first_name, last_name, user_ID) => { //create a new user into our '/users' collection
@@ -25,6 +26,15 @@ createUser((username, first_name, last_name, user_ID) => { //create a new user i
 
 createPhoto ((photo_URL, user_ID, caption) => { //create a new photo to user reference to '/photos' collection
    // returns generated photo_ID
+   database.ref('/photos' + photo_URL).update({
+     photo_ID: photo_ID,
+     user_ID: user_ID,
+     tag_ID: tag_ID,
+     faceRectangle: faceRectangle,
+     likes: 0,
+     caption: caption,
+     photo_URL: photoURL
+   });
 });
 
 getUserID ((username) => { //fetches the 'username's unique 'user_ID' from '/users' collection
@@ -55,15 +65,17 @@ getAllPhotos(() => {
   //returns [{photoURL, caption, likes, tags, faceRectangle}]
 });
 
-increaseLike((photoURL) => {
-
+increaseLike((photo_URL) => {
+  database.ref('/photos' + photo_URL).update({
+    likes: ++
+  });
 });
 
 decreaseLike((photoURL) => {
 
 });
 
-getLike((photoURL) => { //from '/photos' collection, return 'likes' value from 'photoURL' photo.
+getLike((photo_URL) => { //from '/photos' collection, return 'likes' value from 'photoURL' photo.
 //returns likes from DB 
 });
 
@@ -79,4 +91,4 @@ addNameToTag((face_ID, first_name, last_name) => {
 
 });
 
-module.exports.createUser = createUser;
+module.exports = {createUser, createPhoto};
