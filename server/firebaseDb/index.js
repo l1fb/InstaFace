@@ -24,6 +24,7 @@ createUser((username, first_name, last_name, user_ID) => { //create a new user i
       username: username,
       first_name: first_name,
       last_name: last_name,
+      full_name: `${first_name} ${last_name}`,
       user_ID: user_ID
   });
 });
@@ -31,9 +32,9 @@ createUser((username, first_name, last_name, user_ID) => { //create a new user i
 createPhoto((photo_URL, user_ID, caption) => { //create a new photo to user reference to '/photos' collection
    // returns generated photo_ID
    database.ref('/photos' + photo_URL).update({
-     photo_ID: photo_ID,
+     photo_ID: 0, //?
      user_ID: user_ID,
-     tag_ID: tag_ID,
+     tag_ID: {},
      faceRectangle: faceRectangle,
      likes: 0,
      caption: caption,
@@ -98,7 +99,7 @@ createTag((face_ID) => { //
 
 });
 
-addUserToTag((face_ID, userID) => {
+addUserToTag((face_ID, user_ID) => {
 
 });
 
@@ -106,4 +107,4 @@ addNameToTag((face_ID, first_name, last_name) => {
 
 });
 
-module.exports = {createUser, createPhoto, increaseLike, decreaseLike, getLike};
+module.exports = {createUser, createPhoto, increaseLike, decreaseLike, getLike, getAllPhotos};
