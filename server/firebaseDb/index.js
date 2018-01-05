@@ -33,7 +33,7 @@ createPhoto ((photo_URL, user_ID, caption) => { //create a new photo to user ref
      faceRectangle: faceRectangle,
      likes: 0,
      caption: caption,
-     photo_URL: photoURL
+     photo_URL: photo_URL
    });
 });
 
@@ -93,4 +93,4 @@ addNameToTag((face_ID, first_name, last_name) => {
 
 });
 
-module.exports = {createUser, createPhoto, increaseLike};
+module.exports = {createUser, createPhoto, increaseLike, decreaseLike};
