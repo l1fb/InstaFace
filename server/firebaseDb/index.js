@@ -33,7 +33,7 @@ createPhoto ((photo_URL, user_ID, caption) => { //create a new photo to user ref
      faceRectangle: faceRectangle,
      likes: 0,
      caption: caption,
-     photo_URL: photoURL
+     photo_URL: photo_URL
    });
 });
 
@@ -66,13 +66,15 @@ getAllPhotos(() => {
 });
 
 increaseLike((photo_URL) => {
-  database.ref('/photos' + photo_URL).update({
-    likes: ++
+  database.ref('/photos' + photo_URL + likes).transaction((likes) => {
+    return likes ++;
   });
 });
 
 decreaseLike((photoURL) => {
-
+  database.ref('/photos' + photo_URL + likes).transaction((likes) => {
+    (!!likes) ? likes -- : null;
+  });
 });
 
 getLike((photo_URL) => { //from '/photos' collection, return 'likes' value from 'photoURL' photo.
@@ -91,4 +93,4 @@ addNameToTag((face_ID, first_name, last_name) => {
 
 });
 
-module.exports = {createUser, createPhoto};
+module.exports = {createUser, createPhoto, increaseLike, decreaseLike};
