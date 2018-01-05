@@ -11,8 +11,12 @@ firebase.initializeApp(CONFIG);
 //firebase database
 const database = firebase.database();
 
-
-//exporting functions
+//firebase functions
+readData((path, callback) => { //generalized read data function GET requests
+  database.ref(path).once('value').then(function(snapshot) {
+    callback(snapshot.val());
+  });
+});
 
 createUser((username, first_name, last_name, user_ID) => { //create a new user into our '/users' collection
   //I: from CLIENT username, first_name, last_name, user_ID
@@ -37,18 +41,12 @@ createPhoto((photo_URL, user_ID, caption) => { //create a new photo to user refe
    });
 });
 
-readData((path, callback) => {
-  database.ref(path).once('value').then(function(snapshot) {
-    callback(snapshot.val());
-  });
-});
-
 getUserID((username) => { //fetches the 'username's unique 'user_ID' from '/users' collection
    // returns firebase generated user_ID
    // why do we need this again?
 });
 
-addPhotoTags((photo_ID, tag_ID) => { //combines
+addPhotoTags((photo_ID, tag_ID) => { // combines
   //
 });
 
@@ -70,6 +68,9 @@ getAllFaceIDs(()=> {
 
 getAllPhotos(() => {
   //returns [{photoURL, caption, likes, tags, faceRectangle}]
+  readData('/photos', function(allPhotos) {
+    return allPhotos;
+  })
 });
 
 increaseLike((photo_URL) => {
