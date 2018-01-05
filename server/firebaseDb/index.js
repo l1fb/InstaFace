@@ -78,3 +78,5 @@ addUserToTag((face_ID, userID) => {
 addNameToTag((face_ID, first_name, last_name) => {
 
 });
+
+module.exports.createUser = createUser;
