@@ -20,8 +20,8 @@ const readData = ((path, callback) => { //generalized read data function GET req
 
 const createUser = ((username, first_name, last_name, user_ID) => { //create a new user into our '/users' collection
   //I: from CLIENT username, first_name, last_name, user_ID
-  console.log("firebase just got invoked")
-  database.ref('/users' + user_ID).update({
+  
+  database.ref('/users/' + user_ID).update({
       username: username,
       first_name: first_name,
       last_name: last_name,
@@ -32,13 +32,14 @@ const createUser = ((username, first_name, last_name, user_ID) => { //create a n
 
 const createPhoto = ((photo_URL, user_ID, caption) => { //create a new photo to user reference to '/photos' collection
    // returns generated photo_ID
-   database.ref('/photos' + photo_URL).update({
-     photo_ID: 0, //?
+   console.log("createPhoto - firebase just got invoked");
+   let photo_ID = `${photo_URL}:${user_ID}`
+   database.ref('/photos/' + photo_ID).update({
      user_ID: user_ID,
-     face_ID: 'bla', //from azure
-     faceRectangle: faceRectangle,
+     face_ID: 'bla', //from face recog api
+     faceRectangle: '', //from face recog api
      likes: 0,
-     caption: caption,
+     caption: caption || null,
      photo_URL: photo_URL
    });
 });
