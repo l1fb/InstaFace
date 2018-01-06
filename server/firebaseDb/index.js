@@ -34,7 +34,7 @@ createPhoto((photo_URL, user_ID, caption) => { //create a new photo to user refe
    database.ref('/photos' + photo_URL).update({
      photo_ID: 0, //?
      user_ID: user_ID,
-     tag_ID: {},
+     face_ID: 'bla', //from azure
      faceRectangle: faceRectangle,
      likes: 0,
      caption: caption,
@@ -42,30 +42,26 @@ createPhoto((photo_URL, user_ID, caption) => { //create a new photo to user refe
    });
 });
 
-getUserID((username) => { //fetches the 'username's unique 'user_ID' from '/users' collection
-   // returns firebase generated user_ID
-   // why do we need this again?
-});
-
 addPhotoTags((photo_ID, tag_ID) => { // combines
   //
 });
 
-getTagFromName((first_name) => {
+getTagFromName((first_name) => { //when they search for a name. type inthe name to get tag_ID so we can get all photos from that tag_ID
   //returns tag_ID
 });
 
-getTagFromPhoto((photo_ID)=> {
+getTagFromPhoto((photo_ID)=> { //
   //returns tag_ID
 });
 
-getNameFromTag((tag_ID)=> {
+getAllFaceIDs(()=> { //pull up all the faceIDs from all users saved in our db. just the tag.
+  //returns [face_ID] in an array?
+});
+
+getNameFromTag((tag_ID)=> { // when displaying faceRectangle, want to display the name to prompt the user for confirmation
   //returns full_name
 });
 
-getAllFaceIDs(()=> {
-  //returns [face_ID] in an array?
-});
 
 getAllPhotos(() => {
   //returns [{photoURL, caption, likes, tags, faceRectangle}]
@@ -95,16 +91,9 @@ getLike((photo_URL) => { //from '/photos' collection, return 'likes' value from 
   });
 });
 
-createTag((face_ID) => { //
+createTagOnPhoto((full_name, user_ID) => { // will add tag reference on a photo
 
 });
 
-addUserToTag((face_ID, user_ID) => {
-
-});
-
-addNameToTag((face_ID, first_name, last_name) => {
-
-});
 
 module.exports = {createUser, createPhoto, increaseLike, decreaseLike, getLike, getAllPhotos};
