@@ -16,6 +16,6 @@ app.use(morgan('tiny'));
 app.use("/instaface", routes); 
 app.use(express.static(path.resolve(__dirname, '../client/public'))); 
 
-app.listen(PORT, () => {
+app.listen(3000, () => {
     console.log("app is listening on port ", PORT); 
 })
