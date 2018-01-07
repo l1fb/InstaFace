@@ -1,54 +1,54 @@
-const parser = require('body-parser');
-const axios = require('axios');
-const request = require('request');
+// const parser = require('body-parser');
+// const axios = require('axios');
+// const request = require('request');
 
-const detectFace = function (imageUrl) {
-    var returnObj = {
-        faceDetected: false,
-        faceRectangle: {
-            topLeftX: 0,
-            topLeftY: 0,
-            width: 0,
-        }
-    };
+// const detectFace = function (imageUrl) {
+//     var returnObj = {
+//         faceDetected: false,
+//         faceRectangle: {
+//             topLeftX: 0,
+//             topLeftY: 0,
+//             width: 0,
+//         }
+//     };
 
-    imageUrl = imageUrl;
-    bodybod = {
-        "image": imageUrl,
-        "selector": "ROLL" 
-    }
-
-
-    function processImage() {
-        request({
-            method: 'POST',
-            url: 'https://api.kairos.com/detect',
-            headers: {
-              'Content-Type': 'application/json',
-              'app_id': '562b6c3e',
-              'app_key': 'c10f1cb231d8b685c3a376dee49e75f6'
-            },
-            body: JSON.stringify(bodybod),
-          }, function (error, response, body) {
-            // console.log('Status:', response.statusCode);
-            // console.log('Headers:', JSON.stringify(response.headers));
-            // console.log('Response:', body);
-            returnObj.faceRectangle.topLeftX = response.images[0].faces.topLeftX;
-            returnObj.faceRectangle.topLeftY = response.images.faces.topLeftY;
-            returnObj.faceRectangle.width = response.images.faces.width;
+//     imageUrl = imageUrl;
+//     bodybod = {
+//         "image": imageUrl,
+//         "selector": "ROLL" 
+//     }
 
 
-          });
-    };
+//     function processImage() {
+//         request({
+//             method: 'POST',
+//             url: 'https://api.kairos.com/detect',
+//             headers: {
+//               'Content-Type': 'application/json',
+//               'app_id': '562b6c3e',
+//               'app_key': 'c10f1cb231d8b685c3a376dee49e75f6'
+//             },
+//             body: JSON.stringify(bodybod),
+//           }, function (error, response, body) {
+//             // console.log('Status:', response.statusCode);
+//             // console.log('Headers:', JSON.stringify(response.headers));
+//             // console.log('Response:', body);
+//             returnObj.faceRectangle.topLeftX = response.images[0].faces.topLeftX;
+//             returnObj.faceRectangle.topLeftY = response.images.faces.topLeftY;
+//             returnObj.faceRectangle.width = response.images.faces.width;
 
-    processImage();
+
+//           });
+//     };
+
+//     processImage();
 
 
-    return returnObj
-}
+//     return returnObj
+// }
 
 
-module.exports.detectFace = detectFace;
+// module.exports.detectFace = detectFace;
 
 // DETECTFACE DOCUMENTATION
 // ========================   

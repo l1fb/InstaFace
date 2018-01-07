@@ -4,7 +4,7 @@ const router = express.Router();
 //l1fb - requiring firebase DB controller
 const firebaseDatabase = require('../firebaseDb');
 
-router.route('/users/createUser').post((req, res) => {
+router.route('/users/createUser').post((req, res) => { //complete
   let username = req.body.username;
   let first_name = req.body.first_name;
   let last_name = req.body.last_name;
@@ -14,7 +14,7 @@ router.route('/users/createUser').post((req, res) => {
   res.send(req.body);
 });
 
-router.route('/photos/createPhoto').post((req, res) => {
+router.route('/photos/createPhoto').post((req, res) => { //complete
   let photo_URL = req.body.photo_URL;
   let user_ID = req.body.user_ID;
   let caption = req.body.caption || null;
@@ -23,7 +23,7 @@ router.route('/photos/createPhoto').post((req, res) => {
   res.send(req.body);
 });
 
-router.route('/photos/getAllPhotos').get((req, res) => {
+router.route('/photos/getAllPhotos').get((req, res) => { //complete
 
   firebaseDatabase.getAllPhotos(function(allPhotos) {
     res.status(200).send(allPhotos);
@@ -32,9 +32,20 @@ router.route('/photos/getAllPhotos').get((req, res) => {
 
 router.route('/photos/increaseLike').put((req, res) => { //incomplete
   firebaseDatabase.increaseLike(req.body.photo_URL);
-  console.log(req);
-  res.send(req.body.photo_URL + " has been liked!")
+  console.log("increaseLike routes responding!", req);
+  res.send(req.body.photo_URL)
 });
 
+router.route('/photos/dereaseLike').put((req, res) => { //incomplete
+  firebaseDatabase.decreaseLike(req.body.photo_URL);
+  console.log("decreaseLike routes responding!", req);
+  res.send(req.body.photo_URL)
+});
+
+router.route('/photos/getLikes').get((req, res) => { //incomplete - gets each photos object with the photo_URL
+  firebaseDatabase.getLikes(req.headers.query, function(photoInfo) {
+    res.status(200).send(photoInfo);
+  })
+});
 
 module.exports = router; 
