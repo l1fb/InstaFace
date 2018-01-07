@@ -13,9 +13,11 @@ const database = firebase.database();
 
 //firebase functions
 const readData = ((path, callback) => { //generalized read data function GET requests
-  database.ref(path).once('value').then(function(snapshot) {
-    callback(snapshot.val());
-  });
+  database.ref(path).once('value')
+    .then(function(snapshot) {
+      console.log('this is from snapshot', snapshot.val());
+      callback(snapshot.val());
+    });
 });
 
 const createUser = ((username, first_name, last_name, user_ID) => { //create a new user into our '/users' collection
@@ -50,6 +52,7 @@ const addPhotoTags = (photo_ID, tag_ID) => { // combines
 
 const getTagFromName = (first_name) => { //when they search for a name. type inthe name to get tag_ID so we can get all photos from that tag_ID
   //returns tag_ID
+  
 };
 
 const getTagFromPhoto = (photo_ID) => { //
@@ -57,34 +60,34 @@ const getTagFromPhoto = (photo_ID) => { //
 };
 
 const getAllFaceIDs = () => { //pull up all the faceIDs from all users saved in our db. just the tag.
-  //returns [face_ID] in an array?
+  //returns [face_ID] - in an array?
 };
 
-const getNameFromTag = (tag_ID )=> { // when displaying faceRectangle, want to display the name to prompt the user for confirmation
+const getNameFromTag = (tag_ID)=> { // when displaying faceRectangle, want to display the name to prompt the user for confirmation
   //returns full_name
 };
 
 
-const getAllPhotos = () => {
+const getAllPhotos = (callback) => {
   //returns [{photoURL, caption, likes, tags, faceRectangle}]
   readData('/photos', function(allPhotos) {
-    return allPhotos;
+    callback(allPhotos);
   })
 };
 
 const increaseLike = (photo_URL) => {
-  database.ref('/photos' + photo_URL + likes).transaction((likes) => {
+  database.ref('/photos/' + photo_URL + '/likes').transaction((likes) => {
     return likes ++;
   });
 };
 
-const decreaseLike = (photoURL) => {
+const decreaseLike = (photo_URL) => {
   database.ref('/photos' + photo_URL + likes).transaction((likes) => {
     (!!likes) ? likes -- : null;
   });
 };
 
-const getLike =(photo_URL) => { //from '/photos' collection, return 'likes' value from 'photoURL' photo.
+const getLike = (photo_URL) => { //from '/photos' collection, return 'likes' value from 'photoURL' photo.
 //returns likes from DB 
   let path = `/photos/${photo_URL}`;
 

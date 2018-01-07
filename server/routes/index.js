@@ -23,5 +23,18 @@ router.route('/photos/createPhoto').post((req, res) => {
   res.send(req.body);
 });
 
+router.route('/photos/getAllPhotos').get((req, res) => {
+
+  firebaseDatabase.getAllPhotos(function(allPhotos) {
+    res.status(200).send(allPhotos);
+  });  
+});
+
+router.route('/photos/increaseLike').put((req, res) => { //incomplete
+  firebaseDatabase.increaseLike(req.body.photo_URL);
+  console.log(req);
+  res.send(req.body.photo_URL + " has been liked!")
+});
+
 
 module.exports = router; 
