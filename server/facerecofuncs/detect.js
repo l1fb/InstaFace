@@ -50,24 +50,24 @@ const detectFace = function (imageUrl) {
 
 module.exports.detectFace = detectFace;
 
-// DETECTFACE DOCUMENTATION
-// ========================   
+DETECTFACE DOCUMENTATION
+========================   
 
-// detectFace function analyzes a photograph and returns an object
-// indicating whether a face was detected in the photo, along with
-// details pertainign to the face detected (location coordinates).a
+detectFace function analyzes a photograph and returns an object
+indicating whether a face was detected in the photo, along with
+details pertainign to the face detected (location coordinates).a
 
-// Arguments:
-//     1) imageUrl: link to image to be analyzed
+Arguments:
+    1) imageUrl: link to image to be analyzed
 
-// Return value: Object containing:
-//     1) faceDetected: true if face is detected
-//     2) faceRectangle: object conatining coordinates of face 
-//        rectangle (top, left, width and height)
-//    3) FaceId: faceId as provided by API
-// 
-// Notes:
-//     - Face Rectangle is a box that Kairo's face regonition API 
-//     creates around a face it recognizes. One additional thing to
-//     note is that the returned coordinates all begin at the top left 
-//     of the photo.
+Return value: Object containing:
+    1) faceDetected: true if face is detected
+    2) faceRectangle: object conatining coordinates of face 
+       rectangle (top, left, width and height)
+   3) FaceId: faceId as provided by API
+
+Notes:
+    - Face Rectangle is a box that Kairo's face regonition API 
+    creates around a face it recognizes. One additional thing to
+    note is that the returned coordinates all begin at the top left 
+    of the photo.
