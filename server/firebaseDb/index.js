@@ -83,8 +83,6 @@ const addPhotoTags = (photo_ID, tag_ID) => { // combines
   //
 };
 
-
-
 const getTagFromPhoto = (photo_ID) => { //
   //returns tag_ID
 };
