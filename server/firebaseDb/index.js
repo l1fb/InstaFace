@@ -75,14 +75,15 @@ const getAllPhotos = (callback) => {
 };
 
 const increaseLike = (photo_URL) => {
-  database.ref('/photos/' + photo_URL + '/likes').transaction((likes) => {
-    return likes++;
+  database.ref('/photos/' + photo_URL).child('likes').transaction((likes) => {
+    console.log("whats inside the increased like", likes);
+    return likes + 1;
   });
 };
 
 const decreaseLike = (photo_URL) => {
   database.ref('/photos' + photo_URL + '/likes').transaction((likes) => {
-    (!!likes) ? likes-- : null;
+    (!!likes) ? likes - 1 : null;
   });
 };
 
