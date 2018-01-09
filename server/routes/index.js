@@ -41,7 +41,7 @@ router.route('/photos/decreaseLike').put((req, res) => { //incomplete
   res.send("Decresased a Like :(");
 });
 
-router.route('/photos/photoInfo').get((req, res) => { //incomplete - gets each photos object with the photo_URL
+router.route('/photos/getphotoInfo').get((req, res) => { //incomplete - gets each photos object with the photo_URL
   firebaseDatabase.getPhotoInfo(req.headers.query, function(photoInfo) {
     // let likes = JSON.parse(photoInfo)["likes"];
     // console.log(likes)
