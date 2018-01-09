@@ -12,7 +12,6 @@ const enrollFace = function (imageUrl, subjectId, callback) {
 
     var returnVal = false;
 
-    imageUrl = imageUrl;
     bodybod = {
         "image": imageUrl,
         "subject_id": subjectId,
