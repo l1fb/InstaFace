@@ -16,10 +16,10 @@ const detectFace = function (imageUrl, callback) {
             topLeftX: 0,
             topLeftY: 0,
             width: 0,
+            height: 0
         }
     };
 
-    imageUrl = imageUrl;
     bodybod = {
         "image": imageUrl,
         "selector": "ROLL" 
@@ -46,6 +46,7 @@ const detectFace = function (imageUrl, callback) {
                 returnObj.faceRectangle["topLeftX"] = parsedBody.images[0].faces[0].topLeftX
                 returnObj.faceRectangle["topLeftY"] = parsedBody.images[0].faces[0].topLeftY
                 returnObj.faceRectangle["width"] = parsedBody.images[0].faces[0].width
+                returnObj.faceRectangle["height"] = parsedBody.images[0].faces[0].height
                 callback(returnObj)
             })
             .catch((err) => {
