@@ -32,13 +32,13 @@ router.route('/photos/getAllPhotos').get((req, res) => { //complete
 router.route('/photos/increaseLike').put((req, res) => { //incomplete
   firebaseDatabase.increaseLike(req.body.photo_URL);
   // console.log("increaseLike routes responding!", req);
-  res.send("Increased a Like!");
+  res.send("Increased a Like! Spread the love..");
 });
 
 router.route('/photos/decreaseLike').put((req, res) => { //incomplete
   firebaseDatabase.decreaseLike(req.body.photo_URL);
   // console.log("decreaseLike routes responding!", req);
-  res.send("Decresased a Like :(");
+  res.send("Decresased a Like :( why tho..");
 });
 
 router.route('/photos/getphotoInfo').get((req, res) => { //incomplete - gets each photos object with the photo_URL

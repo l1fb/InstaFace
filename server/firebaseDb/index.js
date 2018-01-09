@@ -82,8 +82,8 @@ const increaseLike = (photo_URL) => {
 };
 
 const decreaseLike = (photo_URL) => {
-  database.ref('/photos' + photo_URL + '/likes').transaction((likes) => {
-    (!!likes) ? likes - 1 : null;
+  database.ref('/photos/' + photo_URL).child('likes').transaction((likes) => {
+    return (Boolean(likes)) ? likes - 1 : likes = 0;
   });
 };
 
