@@ -42,11 +42,15 @@ router.route('/photos/decreaseLike').put((req, res) => { //completed
 });
 
 router.route('/photos/getphotoInfo').get((req, res) => { //completed - gets each photos object with the photo_URL
+  //
   firebaseDatabase.getPhotoInfo(req.headers.query, function(photoInfo) {
-    // let likes = JSON.parse(photoInfo)["likes"];
-    // console.log(likes)
     res.status(200).send(photoInfo);
   })
+});
+
+router.route('/photos/addPhotoTags').put((req, res) => {
+  firebaseDatabase.addPhotoTags(req.body.photo_URL, req.body.tag_name);
+  res.send('successfully added a tag on the photo');
 });
 
 module.exports = router; 

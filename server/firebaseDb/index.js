@@ -74,32 +74,30 @@ const getPhotoInfo = (photo_URL, callback) => { //from '/photos' collection, ret
   });
 };
 
-const getTagFromName = (first_name) => { //when they search for a name. type inthe name to get tag_ID so we can get all photos from that tag_ID
-  //returns tag_ID
-  
+// const getTagFromName = (first_name) => { //when they search for a name. type inthe name to get tag_ID so we can get all photos from that tag_ID
+//   //returns tag_ID
+// };
+
+const addPhotoTags = (photo_URL, tag_name) => { // combines
+  //update a specific photo_URL with the tag_name
+  database.ref('/photos/' + photo_URL).child('tag_name').transaction((tag) => {
+    return tag_name;
+  });
 };
 
-const addPhotoTags = (photo_ID, tag_ID) => { // combines
-  //
-};
+// const getAllFaceIDs = () => { //pull up all the faceIDs from all users saved in our db. just the tag.
+//   //returns [face_ID] - in an array?
+// };
 
-const getTagFromPhoto = (photo_ID) => { //
-  //returns tag_ID
-};
+// const getNameFromTag = (tag_ID)=> { // when displaying faceRectangle, want to display the name to prompt the user for confirmation
+//   //returns full_name
+// };
 
-const getAllFaceIDs = () => { //pull up all the faceIDs from all users saved in our db. just the tag.
-  //returns [face_ID] - in an array?
-};
+// const createTagOnPhoto = (full_name, user_ID) => { // will add tag reference on a photo
 
-const getNameFromTag = (tag_ID)=> { // when displaying faceRectangle, want to display the name to prompt the user for confirmation
-  //returns full_name
-};
-
-const createTagOnPhoto = (full_name, user_ID) => { // will add tag reference on a photo
-
-};
+// };
 
 
 
 
-module.exports = { createUser, createPhoto, increaseLike, decreaseLike, getPhotoInfo, getAllPhotos };
+module.exports = { createUser, createPhoto, increaseLike, decreaseLike, getPhotoInfo, getAllPhotos, addPhotoTags };
