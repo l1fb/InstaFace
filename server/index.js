@@ -21,6 +21,8 @@ app.listen(3000, () => {
     console.log("app is listening on port ", PORT); 
 })
 
-console.log(face.detectFace("http://www.uni-regensburg.de/Fakultaeten/phil_Fak_II/Psychologie/Psy_II/beautycheck/english/durchschnittsgesichter/m(01-32)_gr.jpg"));
-
+var urltest = "http://www.uni-regensburg.de/Fakultaeten/phil_Fak_II/Psychologie/Psy_II/beautycheck/english/durchschnittsgesichter/m(01-32)_gr.jpg";
+face.detectFace(urltest, (value) => {
+    console.log("orgiinal", value);
+})
 
