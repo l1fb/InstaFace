@@ -102,3 +102,4 @@ const createTagOnPhoto = (full_name, user_ID) => { // will add tag reference on 
 
 
 module.exports = { createUser, createPhoto, increaseLike, decreaseLike, getPhotoInfo, getAllPhotos };
+
