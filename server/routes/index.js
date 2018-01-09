@@ -24,7 +24,6 @@ router.route('/photos/createPhoto').post((req, res) => { //complete
 });
 
 router.route('/photos/getAllPhotos').get((req, res) => { //complete
-
   firebaseDatabase.getAllPhotos(function(allPhotos) {
     res.status(200).send(allPhotos);
   });  
@@ -32,18 +31,20 @@ router.route('/photos/getAllPhotos').get((req, res) => { //complete
 
 router.route('/photos/increaseLike').put((req, res) => { //incomplete
   firebaseDatabase.increaseLike(req.body.photo_URL);
-  console.log("increaseLike routes responding!", req);
-  res.send(req.body.photo_URL)
+  // console.log("increaseLike routes responding!", req);
+  res.send("Increased a Like!");
 });
 
-router.route('/photos/dereaseLike').put((req, res) => { //incomplete
+router.route('/photos/decreaseLike').put((req, res) => { //incomplete
   firebaseDatabase.decreaseLike(req.body.photo_URL);
-  console.log("decreaseLike routes responding!", req);
-  res.send(req.body.photo_URL)
+  // console.log("decreaseLike routes responding!", req);
+  res.send("Decresased a Like :(");
 });
 
-router.route('/photos/getLikes').get((req, res) => { //incomplete - gets each photos object with the photo_URL
-  firebaseDatabase.getLikes(req.headers.query, function(photoInfo) {
+router.route('/photos/photoInfo').get((req, res) => { //incomplete - gets each photos object with the photo_URL
+  firebaseDatabase.getPhotoInfo(req.headers.query, function(photoInfo) {
+    // let likes = JSON.parse(photoInfo)["likes"];
+    // console.log(likes)
     res.status(200).send(photoInfo);
   })
 });

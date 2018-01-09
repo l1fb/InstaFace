@@ -15,7 +15,7 @@ const database = firebase.database();
 const readData = ((path, callback) => { //generalized read data function GET requests
   database.ref(path).once('value')
     .then(function(snapshot) {
-      console.log('this is from snapshot val', snapshot.val());
+      // console.log('this is from snapshot val', snapshot.val());
       callback(snapshot.val());
     });
 });
@@ -76,22 +76,22 @@ const getAllPhotos = (callback) => {
 
 const increaseLike = (photo_URL) => {
   database.ref('/photos/' + photo_URL + '/likes').transaction((likes) => {
-    return likes ++;
+    return likes++;
   });
 };
 
 const decreaseLike = (photo_URL) => {
-  database.ref('/photos' + photo_URL + likes).transaction((likes) => {
-    (!!likes) ? likes -- : null;
+  database.ref('/photos' + photo_URL + '/likes').transaction((likes) => {
+    (!!likes) ? likes-- : null;
   });
 };
 
-const getLikes = (photo_URL, callback) => { //from '/photos' collection, return 'likes' value from 'photoURL' photo.
+const getPhotoInfo = (photo_URL, callback) => { //from '/photos' collection, return 'likes' value from 'photoURL' photo.
   let path = `/photos/${photo_URL}`;
 
-  readData(path, function(photo) {
+  readData(path, function(photoInfo) {
     // console.log("this is how the each photo:", photo);
-    callback(photo); //returns the integer
+    callback(photoInfo); //returns the integer
   });
 };
 
@@ -100,4 +100,4 @@ const createTagOnPhoto = (full_name, user_ID) => { // will add tag reference on 
 };
 
 
-module.exports = { createUser, createPhoto, increaseLike, decreaseLike, getLikes, getAllPhotos };
+module.exports = { createUser, createPhoto, increaseLike, decreaseLike, getPhotoInfo, getAllPhotos };
