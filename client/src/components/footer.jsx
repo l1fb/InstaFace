@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer = () => (
   <div>
-    Footer says hi
+    Copyright 2018 © InstaFace. All Rights Reserved.
   </div>
 );
 

@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 
 class Likes extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
       <div>
-        Likes says hi
+        {this.props.count}
       </div>
     );
   }

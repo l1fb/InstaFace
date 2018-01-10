@@ -4,7 +4,16 @@ class Search extends Component {
   render() {
     return (
       <div>
-        Search says hi
+        <input 
+          type="text"
+          name="search"
+          placeholder="Enter Name"
+        />
+        <img 
+          src="./assets/images/search-btn.jpg"
+          alt="search-button"
+          className="searchBtn"
+        />
       </div>
     );
   }

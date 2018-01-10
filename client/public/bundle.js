@@ -18319,7 +18319,6 @@ var App = function App() {
   return _react2.default.createElement(
     'div',
     null,
-    'App says hi',
     _react2.default.createElement(_header2.default, null),
     _react2.default.createElement(_search2.default, null),
     _react2.default.createElement(_upload2.default, null),
@@ -18355,7 +18354,11 @@ var Header = function Header() {
   return _react2.default.createElement(
     'div',
     null,
-    'Header says hi',
+    _react2.default.createElement('img', {
+      src: './assets/images/instaface-logo.png',
+      alt: 'instagace-logo',
+      className: 'logo'
+    }),
     _react2.default.createElement(_authorization2.default, null)
   );
 };
@@ -18397,12 +18400,21 @@ var Search = function (_Component) {
   }
 
   _createClass(Search, [{
-    key: 'render',
+    key: "render",
     value: function render() {
       return _react2.default.createElement(
-        'div',
+        "div",
         null,
-        'Search says hi'
+        _react2.default.createElement("input", {
+          type: "text",
+          name: "search",
+          placeholder: "Enter Name"
+        }),
+        _react2.default.createElement("img", {
+          src: "./assets/images/search-btn.jpg",
+          alt: "search-button",
+          className: "searchBtn"
+        })
       );
     }
   }]);
@@ -30261,13 +30273,13 @@ var photos = function photos() {
     id: 1,
     caption: 'Sylvain Eating',
     tag_name: 'Sylvain Ung',
-    url: 'localhost:3000',
+    url: './assets/images/hawk.jpg',
     likes: 123
   }, {
-    id: 1,
+    id: 2,
     caption: 'Shivani Eating',
     tag_name: 'Shivani Patel',
-    url: 'localhost:3000',
+    url: './assets/images/scarjo.jpg',
     likes: 353
   }];
 };
@@ -30345,7 +30357,7 @@ var Footer = function Footer() {
   return _react2.default.createElement(
     'div',
     null,
-    'Footer says hi'
+    'Copyright 2018 \xA9 InstaFace. All Rights Reserved.'
   );
 };
 
@@ -30395,7 +30407,11 @@ var Upload = function (_Component) {
       return _react2.default.createElement(
         'div',
         null,
-        'Upload says hi',
+        _react2.default.createElement(
+          'h2',
+          null,
+          'Upload a photo!'
+        ),
         _react2.default.createElement(_confirmTag2.default, null)
       );
     }
@@ -30473,9 +30489,11 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _likes = __webpack_require__(405);
+var _reactRedux = __webpack_require__(384);
 
-var _likes2 = _interopRequireDefault(_likes);
+var _feedEntry = __webpack_require__(434);
+
+var _feedEntry2 = _interopRequireDefault(_feedEntry);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30495,13 +30513,20 @@ var Feed = function (_Component) {
   }
 
   _createClass(Feed, [{
+    key: 'renderPhotos',
+    value: function renderPhotos() {}
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
         'div',
         null,
-        'Feed says hi',
-        _react2.default.createElement(_likes2.default, null)
+        this.props.photos.map(function (photo) {
+          return _react2.default.createElement(_feedEntry2.default, {
+            key: photo.id,
+            photo: photo
+          });
+        })
       );
     }
   }]);
@@ -30509,7 +30534,13 @@ var Feed = function (_Component) {
   return Feed;
 }(_react.Component);
 
-exports.default = Feed;
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    photos: state.photos
+  };
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(Feed);
 
 /***/ }),
 /* 405 */
@@ -30539,10 +30570,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Likes = function (_Component) {
   _inherits(Likes, _Component);
 
-  function Likes() {
+  function Likes(props) {
     _classCallCheck(this, Likes);
 
-    return _possibleConstructorReturn(this, (Likes.__proto__ || Object.getPrototypeOf(Likes)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Likes.__proto__ || Object.getPrototypeOf(Likes)).call(this, props));
   }
 
   _createClass(Likes, [{
@@ -30551,7 +30582,7 @@ var Likes = function (_Component) {
       return _react2.default.createElement(
         'div',
         null,
-        'Likes says hi'
+        this.props.count
       );
     }
   }]);
@@ -30560,6 +30591,105 @@ var Likes = function (_Component) {
 }(_react.Component);
 
 exports.default = Likes;
+
+/***/ }),
+/* 406 */,
+/* 407 */,
+/* 408 */,
+/* 409 */,
+/* 410 */,
+/* 411 */,
+/* 412 */,
+/* 413 */,
+/* 414 */,
+/* 415 */,
+/* 416 */,
+/* 417 */,
+/* 418 */,
+/* 419 */,
+/* 420 */,
+/* 421 */,
+/* 422 */,
+/* 423 */,
+/* 424 */,
+/* 425 */,
+/* 426 */,
+/* 427 */,
+/* 428 */,
+/* 429 */,
+/* 430 */,
+/* 431 */,
+/* 432 */,
+/* 433 */,
+/* 434 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _likes = __webpack_require__(405);
+
+var _likes2 = _interopRequireDefault(_likes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var FeedEntry = function (_Component) {
+  _inherits(FeedEntry, _Component);
+
+  function FeedEntry(props) {
+    _classCallCheck(this, FeedEntry);
+
+    var _this = _possibleConstructorReturn(this, (FeedEntry.__proto__ || Object.getPrototypeOf(FeedEntry)).call(this, props));
+
+    console.log('am i getting photos', props.photo);
+    return _this;
+  }
+
+  _createClass(FeedEntry, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement('img', { src: this.props.photo.url, alt: this.props.photo.caption }),
+        _react2.default.createElement(
+          'p',
+          null,
+          this.props.photo.caption
+        ),
+        _react2.default.createElement(_likes2.default, { count: this.props.photo.likes })
+      );
+    }
+  }]);
+
+  return FeedEntry;
+}(_react.Component);
+
+exports.default = FeedEntry;
+
+// {
+//   id: 1,
+//   caption: 'Sylvain Eating',
+//   tag_name: 'Sylvain Ung',
+//   url: 'localhost:3000',
+//   likes: 123
+// }
 
 /***/ })
 /******/ ]);

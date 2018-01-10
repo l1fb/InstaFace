@@ -1,15 +1,30 @@
 import React, { Component } from 'react';
-import Likes from './likes';
+import { connect } from 'react-redux';
+import FeedEntry from './feedEntry';
 
 class Feed extends Component {
+  renderPhotos() {
+    
+  }
+
   render() {
     return (
       <div>
-        Feed says hi
-        <Likes />
+        {this.props.photos.map(photo =>
+          <FeedEntry
+            key={photo.id}
+            photo={photo}
+          />
+        )}
       </div>
     );
   }
 }
 
-export default Feed;
+const mapStateToProps = (state) => {
+  return {
+    photos: state.photos
+  };
+};
+
+export default connect(mapStateToProps)(Feed);
