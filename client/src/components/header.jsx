@@ -3,7 +3,11 @@ import Authorization from '../containers/authorization';
 
 const Header = () => (
   <div>
-    Header says hi
+    <img 
+      src="./assets/images/instaface-logo.png"
+      alt="instagace-logo"
+      className="logo"
+    />
     <Authorization />
   </div>
 );

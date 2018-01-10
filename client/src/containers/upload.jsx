@@ -5,7 +5,7 @@ class Upload extends Component {
   render() {
     return (
       <div>
-        Upload says hi
+        <h2>Upload a photo!</h2>
         <ConfirmTag />
       </div>
     );

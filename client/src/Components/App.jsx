@@ -6,13 +6,13 @@ import Feed from '../containers/feed';
 import Footer from './footer';
 
 const App = () => (
-  <div>App says hi
+  <div>
     <Header />
     <Search />
     <Upload />
     <Feed />
     <Footer />
   </div>
-)
+);
 
 export default App; 

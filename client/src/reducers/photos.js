@@ -4,14 +4,14 @@ const photos = () => {
       id: 1,
       caption: 'Sylvain Eating',
       tag_name: 'Sylvain Ung',
-      url: 'localhost:3000',
+      url: './assets/images/hawk.jpg',
       likes: 123
     },
     {
-      id: 1,
+      id: 2,
       caption: 'Shivani Eating',
       tag_name: 'Shivani Patel',
-      url: 'localhost:3000',
+      url: './assets/images/scarjo.jpg',
       likes: 353
     }
   ];
