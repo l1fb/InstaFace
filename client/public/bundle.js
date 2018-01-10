@@ -30334,12 +30334,12 @@ var Authorization = function (_Component) {
   }
 
   _createClass(Authorization, [{
-    key: 'render',
+    key: "render",
     value: function render() {
       return _react2.default.createElement(
-        'div',
-        null,
-        'Authorization says hi'
+        "div",
+        { className: "auth" },
+        "Sign In"
       );
     }
   }]);

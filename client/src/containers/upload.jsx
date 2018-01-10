@@ -4,7 +4,7 @@ import ConfirmTag from './confirmTag';
 class Upload extends Component {
   render() {
     return (
-      <div>
+      <div className="jumbotron container">
         <h2>Upload a photo!</h2>
         <ConfirmTag />
       </div>
