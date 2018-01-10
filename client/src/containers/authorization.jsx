@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 class Authorization extends Component {
   render() {
     return (
-      <div>
-        Authorization says hi
+      <div className="auth">
+        Sign In 
       </div>
     );
   }
