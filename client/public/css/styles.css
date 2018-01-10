@@ -1,8 +1,179 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+/*
+  ========================================
+  CSS Reset
+  ========================================
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+
+/*
+  ========================================
+  Custom
+  ========================================
+*/
+
+.jumbotron {
+  background-color: #aeaeea;
+  border-radius: 0%;
+}
+
+body {
+  background: #e6ecf0;
+  font: 400 20px/24px "Lato", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #616161
+}
+
+textarea:hover, input:hover, textarea:active, input:active, textarea:focus, input:focus {
+  outline:0px !important;
+}
+
+
+/*
+  ========================================
+  Typography
+  ========================================
+*/
+
+strong {
+  font-weight: 700;
+}
+
+cite, em {
+  font-style: italic;
+}
+
+
+/*
+  ========================================
+  Header
+  ========================================
+*/
+
+.header {
+  -webkit-box-shadow: 0px 0px 5px rgba(100, 100, 100, 0.49);
+  -moz-box-shadow:    0px 0px 5px rgba(100, 100, 100, 0.49);
+  box-shadow:         0px 0px 5px rgba(100, 100, 100, 0.49);
+  height: 125px;
+  padding-top: 35px;
+  background-color: white;
+  /* position: fixed; */
+  width: 100%;
+  z-index:999;
+  opacity: 0.9;
+  filter: alpha(opacity=90);
+}
+
 .logo {
   width: 275px;
 }
 
+.auth {
+  float: right;
+  padding-top: 10px;
+}
+
+
+/*
+========================================
+Search
+========================================
+*/
+
+.searchContainer {
+  background-image: url('../assets/images/face-collage.jpg');
+  height: 350px;
+  margin-bottom: 50px;
+}
+
+.search {
+  padding-top: 130px;
+  padding-left: 180px;
+}
+
+.searchInput {
+  height: 75px;
+  padding-left: 25px;
+  padding-bottom: 4px;
+  border: none;
+  width: 700px;
+  -webkit-box-shadow: 0px 0px 5px rgba(100, 100, 100, 0.49);
+  -moz-box-shadow:    0px 0px 5px rgba(100, 100, 100, 0.49);
+  box-shadow:         0px 0px 5px rgba(100, 100, 100, 0.49);
+}
+
 .searchBtn {
-  margin-top: 10px;
-  height: 20px;
+  height: 75px;
+  border-radius: 0;
+  background-color: #26427e;
+  width: 100px;
+}
+
+.searchBtn:hover {
+  background-color: #172d5e;
+}
+
+.searchIcon {
+  margin-top: 5px;
+}
+
+
+/*
+  ========================================
+  Footer
+  ========================================
+*/
+
+.footer {
+  text-align: center;
+  background-color: #26427e;
+  color: white;
+  padding: 40px 0 40px 0;
 }
