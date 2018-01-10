@@ -8,3 +8,6 @@ const CONFIG = {
   storageBucket: "instaface-4825d.appspot.com",
   messagingSenderId: "YOUR_ID_HERE"
 };
+
+
+module.exports = CONFIG;
