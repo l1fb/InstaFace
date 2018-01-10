@@ -5,6 +5,8 @@ const path = require('path');
 require('dotenv').config({path: path.resolve(__dirname, '/.env')});
 const CONFIG = require('../../api.js')
 
+console.log('ao;sidfkjaeiuldkfgjhafadf', CONFIG)
+
 //initializing firebase database with the APIkey
 firebase.initializeApp(CONFIG);
 
