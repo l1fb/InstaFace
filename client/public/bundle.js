@@ -18353,13 +18353,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var Header = function Header() {
   return _react2.default.createElement(
     'div',
-    null,
-    _react2.default.createElement('img', {
-      src: './assets/images/instaface-logo.png',
-      alt: 'instagace-logo',
-      className: 'logo'
-    }),
-    _react2.default.createElement(_authorization2.default, null)
+    { className: 'header' },
+    _react2.default.createElement(
+      'div',
+      { className: 'container' },
+      _react2.default.createElement('img', {
+        src: './assets/images/instaface-logo.png',
+        alt: 'instagace-logo',
+        className: 'logo'
+      }),
+      _react2.default.createElement(_authorization2.default, null)
+    )
   );
 };
 
@@ -18404,17 +18408,26 @@ var Search = function (_Component) {
     value: function render() {
       return _react2.default.createElement(
         "div",
-        null,
-        _react2.default.createElement("input", {
-          type: "text",
-          name: "search",
-          placeholder: "Enter Name"
-        }),
-        _react2.default.createElement("img", {
-          src: "./assets/images/search-btn.jpg",
-          alt: "search-button",
-          className: "searchBtn"
-        })
+        { className: "searchContainer" },
+        _react2.default.createElement(
+          "div",
+          { className: "container search" },
+          _react2.default.createElement("input", {
+            className: "searchInput",
+            type: "text",
+            name: "search",
+            placeholder: "Search..."
+          }),
+          _react2.default.createElement(
+            "button",
+            { className: "btn btn-lg searchBtn" },
+            _react2.default.createElement("img", {
+              src: "./assets/icons/search-icon.png",
+              alt: "search-icon",
+              className: "searchIcon"
+            })
+          )
+        )
       );
     }
   }]);
@@ -30355,9 +30368,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var Footer = function Footer() {
   return _react2.default.createElement(
-    'div',
-    null,
-    'Copyright 2018 \xA9 InstaFace. All Rights Reserved.'
+    "div",
+    { className: "footer" },
+    _react2.default.createElement(
+      "div",
+      { className: "container" },
+      "Copyright 2018 \xA9 InstaFace. All Rights Reserved."
+    )
   );
 };
 
@@ -30406,7 +30423,7 @@ var Upload = function (_Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        null,
+        { className: 'jumbotron container' },
         _react2.default.createElement(
           'h2',
           null,
@@ -30520,7 +30537,7 @@ var Feed = function (_Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        null,
+        { className: 'jumbotron container' },
         this.props.photos.map(function (photo) {
           return _react2.default.createElement(_feedEntry2.default, {
             key: photo.id,
