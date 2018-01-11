@@ -9,9 +9,13 @@ class FeedEntry extends Component {
 
   render() {
     return (
-      <div>
-        <img src={this.props.photo.url} alt={this.props.photo.caption}/>
-        <p>{this.props.photo.caption}</p>
+      <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12 photoWrapper">
+        <img 
+          src={this.props.photo.url} 
+          alt={this.props.photo.caption}
+          className="photoEntry"
+        />
+        <span>{this.props.photo.caption}</span>
         <Likes count={this.props.photo.likes} />
       </div>
     );

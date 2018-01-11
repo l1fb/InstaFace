@@ -7,7 +7,12 @@ class Likes extends Component {
 
   render() {
     return (
-      <div>
+      <div className="likes">
+        <img 
+          src="./assets/icons/heart-icon-empty.png" 
+          alt="heart-icon-empty"
+          className="likeHeart"
+        />
         {this.props.count}
       </div>
     );
