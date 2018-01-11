@@ -32,4 +32,13 @@ router.route('/photos/searchPhotos')
 
 
 
+router.route('/photos/getPhotoByTag').get((req, res) => {
+  firebaseDatabase.getPhotoByTag(req.headers.query, function(photo_URL) {
+    res.status(200).send(photo_URL);
+  });
+});
+
 module.exports = router; 
+
+
+//superior spider, spider-verse, new 52 justice, the flash 2016, justice league 2011, avengers vs x-man, civil 1 and 2, infinity gauntlet (1991)

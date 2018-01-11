@@ -32,16 +32,18 @@ const createUser = (username, first_name, last_name, user_ID) => { //create a ne
   });
 };
 
-const createPhoto = (photo_URL, user_ID, caption) => { //create a new photo to user reference to '/photos' collection
+const createPhoto = (photo_ID, photo_URL, user_ID, caption) => { //create a new photo to user reference to '/photos' collection
    // returns generated photo_ID
    console.log("createPhoto - firebase just got invoked");
-   database.ref('/photos/' + photo_URL).update({
+   database.ref('/photos/' + photo_ID).update({
      user_ID: user_ID,
+     photo_URL: photo_URL,
      face_ID: 'bla', //from face recog api
      faceRectangle: '', //from face recog api
      likes: 0,
      caption: caption || null,
      tag_name: null,
+     time_stamp: Date.now()
    });
 };
 
@@ -74,16 +76,37 @@ const getPhotoInfo = (photo_URL, callback) => { //from '/photos' collection, ret
   });
 };
 
+const addPhotoTags = (photo_URL, tagName) => { // combines
+  //update a specific photo_URL with the tag_name
+  let fullName = tagName.toLowerCase();
+  let splitName = fullName.split(' ');
+
+  let firstName = splitName[0];
+  let lastName = splitName[1];
+
+  let tag_name = 
+  database.ref('/photos/' + photo_URL).child('tag_name').update({
+    full_name: fullName,
+    first_name: firstName,
+    last_name: lastName
+  });
+};
+
+const getPhotoByTag = (tag_name, callback) => {
+  let searchName = tag_name.toLowerCase();
+
+  database.ref('/photos/').orderByChild('time_stamp').once('value')
+    .then(function(snapshot) {
+      console.log('val', snapshot.val());
+    //   (snapshot.val().first_name === searchName 
+    // || snapshot.val().last_name === searchName
+    // || snapshot.val().full_name === searchName) ? callback(snapshot.key) : console.log('Could not get the photo using the tag', snap);
+    });
+};
+
 // const getTagFromName = (first_name) => { //when they search for a name. type inthe name to get tag_ID so we can get all photos from that tag_ID
 //   //returns tag_ID
 // };
-
-const addPhotoTags = (photo_URL, tag_name) => { // combines
-  //update a specific photo_URL with the tag_name
-  database.ref('/photos/' + photo_URL).child('tag_name').transaction((tag) => {
-    return tag_name;
-  });
-};
 
 // const getAllFaceIDs = () => { //pull up all the faceIDs from all users saved in our db. just the tag.
 //   //returns [face_ID] - in an array?
@@ -100,4 +123,4 @@ const addPhotoTags = (photo_URL, tag_name) => { // combines
 
 
 
-module.exports = { createUser, createPhoto, increaseLike, decreaseLike, getPhotoInfo, getAllPhotos, addPhotoTags };
+module.exports = { createUser, createPhoto, increaseLike, decreaseLike, getPhotoInfo, getAllPhotos, addPhotoTags, getPhotoByTag };
