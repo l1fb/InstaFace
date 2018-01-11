@@ -75,7 +75,7 @@ const getPhotoInfo = (photo_URL, callback) => { //from '/photos' collection, ret
   });
 };
 
-const addPhotoTags = (photo_URL, tagName) => { // combines
+const addPhotoTags = (photo_ID, tagName) => { // combines
   //update a specific photo_URL with the tag_name
   let fullName = tagName.toLowerCase();
   let splitName = fullName.split(' ');
@@ -84,7 +84,7 @@ const addPhotoTags = (photo_URL, tagName) => { // combines
   let lastName = splitName[1];
 
   let tag_name = 
-  database.ref('/photos/' + photo_URL).child('tag_name').update({
+  database.ref('/photos/' + photo_ID).child('tag_name').update({
     full_name: fullName,
     first_name: firstName,
     last_name: lastName
@@ -96,19 +96,18 @@ const getPhotoByTag = (tag_name, callback) => {
 
   database.ref('/photos/').orderByChild('time_stamp').once('value')
     .then(function(snapshot) {
+      let result = {};
       snapshot.forEach(function(childSnapshot) {
         if (childSnapshot.val().tag_name) {
           if (childSnapshot.val().tag_name.first_name === searchName 
           ||  childSnapshot.val().tag_name.last_name === searchName
           ||  childSnapshot.val().tag_name.full_name === searchName) {
-            console.log('childSnapshots', childSnapshot.val());
+             result[childSnapshot.key] = childSnapshot.val();
           }
         }
       });
-    //   (snapshot.val().first_name === searchName 
-    // || snapshot.val().last_name === searchName
-    // || snapshot.val().full_name === searchName) ? callback(snapshot.key) : console.log('Could not get the photo using the tag', snap);
-    });
+      callback(result);
+  });
 };
 
 // const getTagFromName = (first_name) => { //when they search for a name. type inthe name to get tag_ID so we can get all photos from that tag_ID
