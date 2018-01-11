@@ -32,10 +32,10 @@ const createUser = (username, first_name, last_name, user_ID) => { //create a ne
   });
 };
 
-const createPhoto = (photo_URL, user_ID, caption) => { //create a new photo to user reference to '/photos' collection
+const createPhoto = (photo_ID, photo_URL, user_ID, caption) => { //create a new photo to user reference to '/photos' collection
    // returns generated photo_ID
    console.log("createPhoto - firebase just got invoked");
-   database.ref('/photos/' + photo_URL).update({
+   database.ref('/photos/' + photo_ID).update({
      user_ID: user_ID,
      photo_URL: photo_URL,
      face_ID: 'bla', //from face recog api

@@ -8,11 +8,12 @@ const PhotoController = {
     createPhoto : ((req, res) => {
         //here, add photo to S3 and get photoURL
         //fb will not allow urls to be valid path names, we must adjust accordingly
+        let photo_ID = req.body.photo_ID;
         let photo_URL = req.body.photo_URL;
         let user_ID = req.body.user_ID;
         let caption = req.body.caption || null;
         console.log("createPhoto route is responding!", 'AND this is the req:', req.body);
-        firebaseDatabase.createPhoto(photo_URL, user_ID, caption);
+        firebaseDatabase.createPhoto(photo_ID, photo_URL, user_ID, caption);
         let url = 'https://timedotcom.files.wordpress.com/2017/09/obamahealthcarespeech-em-850166806.jpg'
         recognizeFace.recognizeFace(url, (result) => {
             let returnObj = {faceRectangle : result.faceRectangle}             
