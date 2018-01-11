@@ -21,8 +21,7 @@ const readData = (path, callback) => { //generalized read data function GET requ
 };
 
 const createUser = (username, first_name, last_name, user_ID) => { //create a new user into our '/users' collection
-  //I: from CLIENT username, first_name, last_name, user_ID
-  
+   
   database.ref('/users/' + user_ID).update({
       username: username,
       first_name: first_name,
@@ -97,7 +96,15 @@ const getPhotoByTag = (tag_name, callback) => {
 
   database.ref('/photos/').orderByChild('time_stamp').once('value')
     .then(function(snapshot) {
-      console.log('val', snapshot.val());
+      snapshot.forEach(function(childSnapshot) {
+        if (childSnapshot.val().tag_name) {
+          if (childSnapshot.val().tag_name.first_name === searchName 
+          ||  childSnapshot.val().tag_name.last_name === searchName
+          ||  childSnapshot.val().tag_name.full_name === searchName) {
+            console.log('childSnapshots', childSnapshot.val());
+          }
+        }
+      });
     //   (snapshot.val().first_name === searchName 
     // || snapshot.val().last_name === searchName
     // || snapshot.val().full_name === searchName) ? callback(snapshot.key) : console.log('Could not get the photo using the tag', snap);
