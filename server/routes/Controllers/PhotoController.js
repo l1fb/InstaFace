@@ -1,4 +1,3 @@
-
 const firebaseDatabase = require('../../firebaseDb');
 const detectFace = require('../../facerecofuncs/detect'); 
 const enrollFace = require('../../facerecofuncs/enroll');
