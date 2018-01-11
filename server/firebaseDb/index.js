@@ -37,6 +37,7 @@ const createPhoto = (photo_URL, user_ID, caption) => { //create a new photo to u
    console.log("createPhoto - firebase just got invoked");
    database.ref('/photos/' + photo_URL).update({
      user_ID: user_ID,
+     photo_URL: photo_URL,
      face_ID: 'bla', //from face recog api
      faceRectangle: '', //from face recog api
      likes: 0,
@@ -77,21 +78,30 @@ const getPhotoInfo = (photo_URL, callback) => { //from '/photos' collection, ret
 
 const addPhotoTags = (photo_URL, tagName) => { // combines
   //update a specific photo_URL with the tag_name
-  let fullName = tagName.lowercase().split(' ');
+  let fullName = tagName.toLowerCase();
+  let splitName = fullName.split(' ');
 
-  let firstName = fullName[0];
-  let lastName = fullName[1];
+  let firstName = splitName[0];
+  let lastName = splitName[1];
 
   let tag_name = 
   database.ref('/photos/' + photo_URL).child('tag_name').update({
-    full_name: tagName,
+    full_name: fullName,
     first_name: firstName,
     last_name: lastName
   });
 };
 
-const getPhotoWithTag = (tag_name) => {
-  database.ref('/photos/')
+const getPhotoByTag = (tag_name, callback) => {
+  let searchName = tag_name.toLowerCase();
+
+  database.ref('/photos/').orderByChild('time_stamp').once('value')
+    .then(function(snapshot) {
+      console.log('val', snapshot.val());
+    //   (snapshot.val().first_name === searchName 
+    // || snapshot.val().last_name === searchName
+    // || snapshot.val().full_name === searchName) ? callback(snapshot.key) : console.log('Could not get the photo using the tag', snap);
+    });
 };
 
 // const getTagFromName = (first_name) => { //when they search for a name. type inthe name to get tag_ID so we can get all photos from that tag_ID
@@ -113,4 +123,4 @@ const getPhotoWithTag = (tag_name) => {
 
 
 
-module.exports = { createUser, createPhoto, increaseLike, decreaseLike, getPhotoInfo, getAllPhotos, addPhotoTags, getPhotoWithTag };
+module.exports = { createUser, createPhoto, increaseLike, decreaseLike, getPhotoInfo, getAllPhotos, addPhotoTags, getPhotoByTag };

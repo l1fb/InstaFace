@@ -32,6 +32,12 @@ router.route('/photos/searchPhotos')
 
 
 
+router.route('/photos/getPhotoByTag').get((req, res) => {
+  firebaseDatabase.getPhotoByTag(req.headers.query, function(photo_URL) {
+    res.status(200).send(photo_URL);
+  });
+});
+
 module.exports = router; 
 
 
