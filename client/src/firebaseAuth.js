@@ -32,10 +32,16 @@ let fire = {
 
   onAuthStateChanged : function(user) {
     //triggers on any state change
+    let result; 
+    if (user) {
+      result = {name: user.displayName, email: user.email}
+    } else {
+      result = {name: '', email: ''}
+    }
     if (user) { // User is signed in!
-      changeUser(user); 
+      changeUser(result); 
     } else{
-      changeUser('no user')
+      changeUser(result)
     }
   }
 }
