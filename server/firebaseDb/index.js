@@ -42,6 +42,7 @@ const createPhoto = (photo_URL, user_ID, caption) => { //create a new photo to u
      likes: 0,
      caption: caption || null,
      tag_name: null,
+     time_stamp: Date.now()
    });
 };
 
@@ -76,7 +77,7 @@ const getPhotoInfo = (photo_URL, callback) => { //from '/photos' collection, ret
 
 const addPhotoTags = (photo_URL, tagName) => { // combines
   //update a specific photo_URL with the tag_name
-  let fullName = tagName.split(' ');
+  let fullName = tagName.lowercase().split(' ');
 
   let firstName = fullName[0];
   let lastName = fullName[1];
@@ -112,4 +113,4 @@ const getPhotoWithTag = (tag_name) => {
 
 
 
-module.exports = { createUser, createPhoto, increaseLike, decreaseLike, getPhotoInfo, getAllPhotos, addPhotoTags };
+module.exports = { createUser, createPhoto, increaseLike, decreaseLike, getPhotoInfo, getAllPhotos, addPhotoTags, getPhotoWithTag };
