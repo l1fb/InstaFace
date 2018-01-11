@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import fire from '../firebaseAuth';
 import setUser from '../reducers/setUser'
   
-  class Authorization extends Component {
 
 class Authorization extends Component {
 
