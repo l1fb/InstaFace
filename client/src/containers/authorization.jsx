@@ -14,9 +14,17 @@ class Authorization extends Component {
 
   render() {
     return (
+<<<<<<< HEAD
       <div className="auth">
         <button>Sign In With Google</button>
         <button>Sign In With Facebook</button>
+||||||| merged common ancestors
+      <div>
+        Authorization says hi
+=======
+      <div className="auth">
+        Sign In 
+>>>>>>> dev
       </div>
     );
   }
