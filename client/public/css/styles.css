@@ -82,6 +82,10 @@ textarea:hover, input:hover, textarea:active, input:active, textarea:focus, inpu
   ========================================
 */
 
+h2 {
+  font-size: 30px;
+}
+
 strong {
   font-weight: 700;
 }
@@ -138,7 +142,7 @@ Search
 .searchContainer {
   background-image: url('../assets/images/face-collage.jpg');
   height: 350px;
-  margin-bottom: 50px;
+  margin-bottom: 75px;
 }
 
 .search {
@@ -170,6 +174,51 @@ Search
 
 .searchIcon {
   margin-top: 5px;
+}
+
+
+/*
+  ========================================
+  Upload
+  ========================================
+*/
+
+.uploadWrapper {
+  margin-bottom: 85px;
+}
+
+.uploadTitle {
+  margin-bottom: 35px;
+  text-align: center;
+}
+
+.line {
+  height: 1px;
+  width: 100%;
+  margin-top: 12px;
+}
+
+.uploadInput {
+  padding-left: 20px;
+  padding-bottom: 2px;
+  height: 50px;
+  width: 300px;
+}
+
+.uploadBtn {
+  height: 50px;
+  border: none;
+  color: white;
+  background-color: #26427e;
+  width: 150px;
+}
+
+.uploadBtn:hover {
+  background-color: #172d5e;
+}
+
+.fileUploader {
+  margin-left: 320px;
 }
 
 
