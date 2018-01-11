@@ -33,3 +33,6 @@ router.route('/photos/searchPhotos')
 
 
 module.exports = router; 
+
+
+//superior spider, spider-verse, new 52 justice, the flash 2016, justice league 2011, avengers vs x-man, civil 1 and 2, infinity gauntlet (1991)

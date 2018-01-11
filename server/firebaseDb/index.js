@@ -74,16 +74,28 @@ const getPhotoInfo = (photo_URL, callback) => { //from '/photos' collection, ret
   });
 };
 
+const addPhotoTags = (photo_URL, tagName) => { // combines
+  //update a specific photo_URL with the tag_name
+  let fullName = tagName.split(' ');
+
+  let firstName = fullName[0];
+  let lastName = fullName[1];
+
+  let tag_name = 
+  database.ref('/photos/' + photo_URL).child('tag_name').update({
+    full_name: tagName,
+    first_name: firstName,
+    last_name: lastName
+  });
+};
+
+const getPhotoWithTag = (tag_name) => {
+  database.ref('/photos/')
+};
+
 // const getTagFromName = (first_name) => { //when they search for a name. type inthe name to get tag_ID so we can get all photos from that tag_ID
 //   //returns tag_ID
 // };
-
-const addPhotoTags = (photo_URL, tag_name) => { // combines
-  //update a specific photo_URL with the tag_name
-  database.ref('/photos/' + photo_URL).child('tag_name').transaction((tag) => {
-    return tag_name;
-  });
-};
 
 // const getAllFaceIDs = () => { //pull up all the faceIDs from all users saved in our db. just the tag.
 //   //returns [face_ID] - in an array?
