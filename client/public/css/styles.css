@@ -90,6 +90,14 @@ cite, em {
   font-style: italic;
 }
 
+::-webkit-input-placeholder {
+  color: #aeaeae;
+}
+
+input {
+  color: #616161;
+}
+
 
 /*
   ========================================
@@ -143,7 +151,7 @@ Search
   padding-left: 25px;
   padding-bottom: 4px;
   border: none;
-  width: 700px;
+  width: 75%;
   -webkit-box-shadow: 0px 0px 5px rgba(100, 100, 100, 0.49);
   -moz-box-shadow:    0px 0px 5px rgba(100, 100, 100, 0.49);
   box-shadow:         0px 0px 5px rgba(100, 100, 100, 0.49);
@@ -167,6 +175,35 @@ Search
 
 /*
   ========================================
+  Feed
+  ========================================
+*/
+
+.feedWrapper {
+  margin-bottom: 35px;
+}
+
+.photoEntry {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.photoWrapper {
+  margin-bottom: 40px;
+}
+
+.likes {
+  float: right;
+}
+
+.likeHeart {
+  height: 16px;
+  margin-right: 5px;
+}
+
+
+/*
+  ========================================
   Footer
   ========================================
 */
@@ -176,4 +213,5 @@ Search
   background-color: #26427e;
   color: white;
   padding: 40px 0 40px 0;
+  font-size: 16px;
 }

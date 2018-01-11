@@ -9,13 +9,15 @@ class Feed extends Component {
 
   render() {
     return (
-      <div className="jumbotron container">
-        {this.props.photos.map(photo =>
-          <FeedEntry
-            key={photo.id}
-            photo={photo}
-          />
-        )}
+      <div className="container feedWrapper">
+        <div className="row">
+          {this.props.photos.map(photo =>
+            <FeedEntry
+              key={photo.id}
+              photo={photo}
+            />
+          )}
+        </div>
       </div>
     );
   }
