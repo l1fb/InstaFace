@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Header from './header';
 import Search from '../containers/search';
 import Upload from '../containers/upload';

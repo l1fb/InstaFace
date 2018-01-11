@@ -66,13 +66,13 @@ table {
 }
 
 body {
-  background: #e6ecf0;
+  background: white;
   font: 400 20px/24px "Lato", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #616161
 }
 
-textarea:hover, input:hover, textarea:active, input:active, textarea:focus, input:focus {
-  outline:0px !important;
+textarea:hover, input:hover, textarea:active, input:active, textarea:focus, input:focus, button, .btn, .btn-lg {
+  outline: 0px !important;
 }
 
 
@@ -96,6 +96,7 @@ cite, em {
 
 ::-webkit-input-placeholder {
   color: #aeaeae;
+  font-weight: 300;
 }
 
 input {
@@ -114,7 +115,7 @@ input {
   -moz-box-shadow:    0px 0px 5px rgba(100, 100, 100, 0.49);
   box-shadow:         0px 0px 5px rgba(100, 100, 100, 0.49);
   height: 125px;
-  padding-top: 35px;
+  padding-top: 30px;
   background-color: white;
   /* position: fixed; */
   width: 100%;
@@ -129,7 +130,17 @@ input {
 
 .auth {
   float: right;
-  padding-top: 10px;
+  padding-top: 12px;
+}
+
+.loginBtn {
+  height: 36px;
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+.loginBtn:hover {
+  opacity: 0.75;
 }
 
 
@@ -153,7 +164,7 @@ Search
 .searchInput {
   height: 75px;
   padding-left: 25px;
-  padding-bottom: 4px;
+  padding-bottom: 6px;
   border: none;
   width: 75%;
   -webkit-box-shadow: 0px 0px 5px rgba(100, 100, 100, 0.49);
@@ -166,6 +177,7 @@ Search
   border-radius: 0;
   background-color: #26427e;
   width: 100px;
+  outline: none;
 }
 
 .searchBtn:hover {
@@ -206,11 +218,12 @@ Search
 }
 
 .uploadBtn {
-  height: 50px;
+  height: 48px;
   border: none;
   color: white;
   background-color: #26427e;
   width: 150px;
+  cursor: pointer;
 }
 
 .uploadBtn:hover {
@@ -263,4 +276,5 @@ Search
   color: white;
   padding: 40px 0 40px 0;
   font-size: 16px;
+  font-weight: 300;
 }

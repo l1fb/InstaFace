@@ -5,7 +5,7 @@ const Header = () => (
   <div className="header">
     <div className="container">
       <img 
-        src="./assets/images/instaface-logo.png"
+        src="./assets/images/instaface-logo-new.png"
         alt="instagace-logo"
         className="logo"
       />

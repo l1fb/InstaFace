@@ -5,7 +5,6 @@ import fire from '../firebaseAuth';
 import setUser from '../reducers/setUser'
 
 class Authorization extends Component {
-
   constructor(props) {
     super(props); 
     fire.initFirebase(()=>{});
@@ -15,14 +14,20 @@ class Authorization extends Component {
   render() {
     return (
       <div className="auth">
-        <button>Sign In With Google</button>
-        <button>Sign In With Facebook</button>
+        <img 
+          src="./assets/images/google-login.jpg" 
+          alt="google-login"
+          className="loginBtn"
+        />
+        <img 
+          src="./assets/images/facebook-login.jpg" 
+          alt="facebook-login"
+          className="loginBtn"
+        />
       </div>
     );
   }
 }
-
-
 
 const matchStateToProps = (state) => {
   return {
