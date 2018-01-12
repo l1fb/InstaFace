@@ -38,11 +38,7 @@ let fire = {
     } else {
       result = {name: '', email: ''}
     }
-    if (user) { // User is signed in!
-      changeUser(result); 
-    } else{
-      changeUser(result)
-    }
+    changeUser(result); 
   }
 }
 
