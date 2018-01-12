@@ -27,9 +27,6 @@ router.route('/photos/getPhotoInfo')
 router.route('/photos/addPhotoTags')
   .put(PhotoController.addPhotoTags)
 
-router.route('/photos/searchPhotos')
-  .get(PhotoController.searchPhotos)
-
 router.route('/photos/getPhotoByTag')
   .get(PhotoController.getPhotoByTag)
 
