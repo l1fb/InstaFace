@@ -6,24 +6,24 @@ const recognizeFace = require('../../facerecofuncs/recognize');
 const PhotoController = {
 
     createPhoto : ((req, res) => {
+        let photo = req.file.path;
+        console.log('photo', photo)
         //here, add photo to S3 and get photoURL
-        //let photo_URL = req.body.photo_URL;
-        let photo_URL = req.body.photo_URL;
-        let user_ID = req.body.user_ID;
+        let photo_URL = req.body.photo_URL || 'http://cdn1.theodysseyonline.com/files/2016/02/12/635908929566546939-1088925658_Chandler%20bing2.jpg';
+        let user_ID = req.body.user_ID || '1234';
         let caption = req.body.caption || null;
         let photo_ID = photo_URL.split('/')[3]; 
         firebaseDatabase.createPhoto(photo_ID, photo_URL, user_ID, caption);
-        // recognizeFace.recognizeFace(photo_URL, (result) => {
-        //     let returnObj = {faceRectangle : result.faceRectangle}             
-        //     if (result.candidates && result.candidates[0].confidence > 0.50) {
-        //         returnObj.name = result.candidates[0].subject_id; 
-        //     }
-        //     else {
-        //         returnObj.name = "Anonomyous"
-        //     }
-        //     res.send(returnObj); 
-        // }); 
-        res.send("it has been created");
+        recognizeFace.recognizeFace(photo_URL, (result) => {
+            let returnObj = {faceRectangle : result.faceRectangle}             
+            if (result.candidates && result.candidates[0].confidence > 0.50) {
+                returnObj.name = result.candidates[0].subject_id; 
+            }
+            else {
+                returnObj.name = "Anonomyous"
+            }
+            res.send(returnObj); 
+        }); 
     }),
 
     getAllPhotos : ((req, res) => {
@@ -71,7 +71,8 @@ const PhotoController = {
         firebaseDatabase.getPhotoByTag(req.headers.query, function(photos) {
             res.status(200).send(photos);
           });
-    })
+    }), 
+
 }
 
 module.exports = PhotoController; 
