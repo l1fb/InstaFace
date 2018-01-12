@@ -94,19 +94,18 @@ const addPhotoTags = (photo_ID, tagName) => { // combines
 const getPhotoByTag = (tag_name, callback) => {
   let searchName = tag_name.toLowerCase();
 
-  database.ref('/photos/').orderByChild('time_stamp').once('value')
-    .then(function(snapshot) {
-      let result = {};
-      snapshot.forEach(function(childSnapshot) {
-        if (childSnapshot.val().tag_name) {
-          if (childSnapshot.val().tag_name.first_name === searchName 
-          ||  childSnapshot.val().tag_name.last_name === searchName
-          ||  childSnapshot.val().tag_name.full_name === searchName) {
-             result[childSnapshot.key] = childSnapshot.val();
-          }
+  database.ref('/photos/').orderByChild('time_stamp').once('value').then(function(snapshot) {
+    let result = {};
+    snapshot.forEach(function(childSnapshot) {
+      if (childSnapshot.val().tag_name) {
+        if (childSnapshot.val().tag_name.first_name === searchName 
+        ||  childSnapshot.val().tag_name.last_name === searchName
+        ||  childSnapshot.val().tag_name.full_name === searchName) {
+           result[childSnapshot.key] = childSnapshot.val();
         }
-      });
-      callback(result);
+      }
+    });
+    callback(result);
   });
 };
 
