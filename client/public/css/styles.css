@@ -130,12 +130,12 @@ input {
 
 .auth {
   float: right;
-  padding-top: 12px;
+  padding-top: 16px;
 }
 
 .loginBtn {
-  height: 36px;
-  margin-left: 20px;
+  height: 28px;
+  margin-left: 30px;
   cursor: pointer;
 }
 
