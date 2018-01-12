@@ -1,14 +1,12 @@
-function setUser(state = {name: '', email: ''}, action) {
+const initialState = {
+    user: {name: '', email: '', user_ID: ''}
+}
+
+function setUser(state = initialState, action) {
     switch (action.type) { 
         case 'CHANGE_NAME':
-            return {
-                name: action.name, 
-                email: action.email
-            }
-            break; 
-        case 'LOGOUT': 
-            return {name: '', email: ''}
-            break; 
+            return action.payload;
+            break;  
     }
     return state; 
 }
