@@ -11,6 +11,7 @@ const morgan = require('morgan')
 const detect = require('./facerecofuncs/detect.js');
 const enroll = require('./facerecofuncs/enroll.js');
 const recon = require('./facerecofuncs/recognize.js');
+const host = require('./imagehosting/hosting.js');
 
 app.use(parser.json()); 
 app.use(parser.urlencoded({extended: true})); 
@@ -23,3 +24,7 @@ app.use(express.static(path.resolve(__dirname, '../client/public')));
 app.listen(PORT, () => {
     console.log("app is listening on port ", PORT); 
 })
+
+host.hostImage("/Users/diegoquintanal/Desktop/faceimage.jpg", function(response) {
+    console.log(response)
+});
