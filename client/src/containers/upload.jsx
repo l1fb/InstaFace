@@ -21,7 +21,7 @@ class Upload extends Component {
           </div>
 
           <div className="fileUploader">
-            <input
+            {/* <input
               name="file"
               placeholder="Select a file to upload"
               className="uploadInput"
@@ -30,7 +30,12 @@ class Upload extends Component {
               className="uploadBtn"
             >
               Upload File
-            </button>
+            </button> */}
+            <form
+              action="/file-upload"
+              className="dropzone"
+              id="fileDrop"
+            ></form>
           </div>
         </div>
       </div>
