@@ -34,9 +34,9 @@ let fire = {
     //triggers on any state change
     let result; 
     if (user) {
-      result = {name: user.displayName, email: user.email}
+      result = {name: user.displayName, email: user.email, user_ID: user.uid}
     } else {
-      result = {name: '', email: ''}
+      result = {name: '', email: '', user_ID: ''}
     }
     changeUser(result); 
   }
