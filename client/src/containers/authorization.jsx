@@ -38,7 +38,15 @@ class Authorization extends Component {
       <div className="auth">
       {this.props.user.name ?
       <div>
-        <div>Welcome {this.props.user.name}</div><button onClick={this.logOut}>Sign Out</button>
+        <div>
+          <span>Nice face, {this.props.user.name}!</span>
+          <button 
+            onClick={this.logOut}
+            className="logoutBtn"
+          >
+            Sign Out
+          </button>
+        </div>
       </div>
       :
       <div>
