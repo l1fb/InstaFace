@@ -20,10 +20,9 @@ const readData = (path, callback) => { //generalized read data function GET requ
     });
 };
 
-const createUser = (username, first_name, last_name, user_ID) => { //create a new user into our '/users' collection
+const createUser = (first_name, last_name, user_ID) => { //create a new user into our '/users' collection
    
   database.ref('/users/' + user_ID).update({
-      username: username,
       first_name: first_name,
       last_name: last_name,
       full_name: `${first_name} ${last_name}`,
