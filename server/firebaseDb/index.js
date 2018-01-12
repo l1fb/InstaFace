@@ -55,11 +55,12 @@ const getAllPhotos = (callback) => {
   })
 };
 
-const increaseLike = (photo_ID) => {
-  database.ref('/photos/' + photo_ID).child('likes').transaction((likes) => {
+const increaseLike = (photo_ID, callback) => {
+  database.ref('/photos/' + photo_ID).child('likes')
+  .transaction((likes) => {
     console.log("whats inside the increased like likes:", likes);
     return likes + 1;
-  });
+  })
 };
 
 const decreaseLike = (photo_ID) => {

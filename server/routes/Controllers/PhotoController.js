@@ -34,8 +34,7 @@ const PhotoController = {
 
     increaseLike : ((req, res) => {
         firebaseDatabase.increaseLike(req.body.photo_ID);
-        console.log("increaseLike routes responding!", req.body.photo_ID);
-        res.send("Increased a Like! Spread the love..");
+        res.status(201).send("Increased a Like! spread the love! <3");
     }), 
 
     decreaseLike : ((req, res) => {
