@@ -3,17 +3,15 @@ import { connect } from 'react-redux';
 import FeedEntry from './feedEntry';
 
 class Feed extends Component {
-  renderPhotos() {
-    
-  }
-
   render() {
+    console.log('this is the photos', this.props.photos);
     return (
+      !this.props.photos ? null :
       <div className="container feedWrapper">
         <div className="row">
           {this.props.photos.map(photo =>
             <FeedEntry
-              key={photo.id}
+              key={photo.photo_URL}
               photo={photo}
             />
           )}

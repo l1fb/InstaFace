@@ -37,6 +37,7 @@ const createPhoto = (photo_ID, photo_URL, user_ID, caption) => { //create a new 
    console.log("createPhoto - firebase just got invoked");
    database.ref('/photos/' + photo_ID).update({
      user_ID: user_ID,
+     photo_ID: photo_ID,
      photo_URL: photo_URL,
      face_ID: 'bla', //from face recog api
      faceRectangle: '', //from face recog api
