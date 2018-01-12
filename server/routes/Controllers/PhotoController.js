@@ -66,8 +66,8 @@ const PhotoController = {
     }), 
 
     getPhotoByTag : ((req, res) => {
-        console.log(req.query)
-        firebaseDatabase.getPhotoByTag(req.query.tag_name, function(photo_URL) {
+        console.log('should be mike:', req.query.tag_name)
+        firebaseDatabase.getPhotoByTag(req.query.tag_name, function(photos) {
             res.status(200).send(photo_URL);
           });
     })

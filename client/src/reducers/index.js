@@ -4,7 +4,7 @@ import setUser from './setUser';
 
 const allReducers = combineReducers({
   photos: photosReducer, 
-  setUser: setUser
+  user: setUser
 });
 
 export default allReducers;
