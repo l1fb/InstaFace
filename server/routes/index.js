@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router(); 
 const UserController = require('./Controllers/UserController'); 
 const PhotoController = require('./Controllers/PhotoController'); 
+var multer    =   require( 'multer' );
+var upload    =   multer( { dest: 'uploads/' } );
 
 //l1fb - requiring firebase DB controller
 const firebaseDatabase = require('../firebaseDb');
@@ -9,8 +11,8 @@ const firebaseDatabase = require('../firebaseDb');
 router.route('/users/createUser')
   .post(UserController.createUser)
 
-router.route('/photos/createPhoto')
-  .post(PhotoController.createPhoto)
+router.route('')
+  .post(upload.single('file'), PhotoController.createPhoto)
 
 router.route('/photos/getAllPhotos')
   .get(PhotoController.getAllPhotos)
