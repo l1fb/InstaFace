@@ -20,6 +20,7 @@ const readData = (path, callback) => { //generalized read data function GET requ
     });
 };
 
+//method for user
 const createUser = (first_name, last_name, user_ID) => { //create a new user into our '/users' collection
    
   database.ref('/users/' + user_ID).update({
@@ -30,6 +31,7 @@ const createUser = (first_name, last_name, user_ID) => { //create a new user int
   });
 };
 
+//methods for photos
 const createPhoto = (photo_ID, photo_URL, user_ID, caption) => { //create a new photo to user reference to '/photos' collection
    // returns generated photo_ID
    console.log("createPhoto - firebase just got invoked");
@@ -52,16 +54,16 @@ const getAllPhotos = (callback) => {
   })
 };
 
-const increaseLike = (photo_URL) => {
-  database.ref('/photos/' + photo_URL).child('likes').transaction((likes) => {
-    console.log("whats inside the increased like", likes);
-    return likes++;
+const increaseLike = (photo_ID) => {
+  database.ref('/photos/' + photo_ID).child('likes').transaction((likes) => {
+    console.log("whats inside the increased like likes:", likes);
+    return likes + 1;
   });
 };
 
-const decreaseLike = (photo_URL) => {
-  database.ref('/photos/' + photo_URL).child('likes').transaction((likes) => {
-    return (Boolean(likes)) ? likes-- : likes = 0;
+const decreaseLike = (photo_ID) => {
+  database.ref('/photos/' + photo_ID).child('likes').transaction((likes) => {
+    return (Boolean(likes)) ? likes - 1 : likes = 0;
   });
 };
 
