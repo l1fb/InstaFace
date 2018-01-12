@@ -7,15 +7,13 @@ const PhotoController = {
 
     createPhoto : ((req, res) => {
         //here, add photo to S3 and get photoURL
-        //fb will not allow urls to be valid path names, we must adjust accordingly
-        let photo_ID = req.body.photo_ID;
-        let photo_URL = req.body.photo_URL;
+        //let photo_URL = req.body.photo_URL;
+        let photo_URL = 'http://imagizer.imageshack.com/img923/5938/lJOanw.jpg';
         let user_ID = req.body.user_ID;
         let caption = req.body.caption || null;
-        console.log("createPhoto route is responding!", 'AND this is the req:', req.body);
+        let photo_ID = photo_URL.split('/')[3]; 
         firebaseDatabase.createPhoto(photo_ID, photo_URL, user_ID, caption);
-        let url = 'https://timedotcom.files.wordpress.com/2017/09/obamahealthcarespeech-em-850166806.jpg'
-        recognizeFace.recognizeFace(url, (result) => {
+        recognizeFace.recognizeFace(photo_URL, (result) => {
             let returnObj = {faceRectangle : result.faceRectangle}             
             if (result.candidates && result.candidates[0].confidence > 0.50) {
                 returnObj.name = result.candidates[0].subject_id; 
@@ -53,10 +51,12 @@ const PhotoController = {
 
     addPhotoTags : ((req, res) => {
         let name = req.body.tag_name; 
-        let url = 'https://pbs.twimg.com/profile_images/822547732376207360/5g0FC8XX_400x400.jpg'; 
+        let photo_ID = req.body.photo_ID; 
+        //let url = req.body.photo_URL
+        let url = 'http://imagizer.imageshack.com/img923/5938/lJOanw.jpg'; 
         enrollFace.enrollFace(url, name, (bool) => {
         if (bool) {
-                firebaseDatabase.addPhotoTags(req.body.photo_URL, req.body.tag_name);
+                firebaseDatabase.addPhotoTags(req.body.photo_ID, req.body.tag_name);
                 res.send('successfully added a tag on the photo');
             }
             else {
@@ -65,8 +65,11 @@ const PhotoController = {
         })
     }), 
 
-    searchPhotos : ((req, res) => {
-        //invoke database search function that searches for photos with a certain tag name
+    getPhotoByTag : ((req, res) => {
+        console.log(req.query)
+        firebaseDatabase.getPhotoByTag(req.query.tag_name, function(photo_URL) {
+            res.status(200).send(photo_URL);
+          });
     })
 }
 
