@@ -130,12 +130,12 @@ input {
 
 .auth {
   float: right;
-  padding-top: 12px;
+  padding-top: 16px;
 }
 
 .loginBtn {
-  height: 36px;
-  margin-left: 20px;
+  height: 28px;
+  margin-left: 30px;
   cursor: pointer;
 }
 
@@ -158,7 +158,7 @@ Search
 
 .search {
   padding-top: 130px;
-  padding-left: 180px;
+  text-align: center;
 }
 
 .searchInput {
@@ -208,6 +208,7 @@ Search
   height: 1px;
   width: 100%;
   margin-top: 12px;
+  margin-bottom: 10px;
 }
 
 .uploadInput {
@@ -231,7 +232,18 @@ Search
 }
 
 .fileUploader {
-  margin-left: 320px;
+  text-align: center;
+}
+
+.dropzone {
+  text-align: center;
+  color: #304f94;
+  padding: 50px 100px 50px 100px;
+  border-style: dashed;
+  border-color: #a2b2d6;
+  border-width: 2px;
+  cursor: pointer;
+  width: 100%;
 }
 
 

@@ -16,12 +16,12 @@ class Authorization extends Component {
     return (
       <div className="auth">
         <img 
-          src="./assets/images/google-login.jpg" 
+          src="./assets/icons/google-login.png" 
           alt="google-login"
           className="loginBtn"
         />
         <img 
-          src="./assets/images/facebook-login.jpg" 
+          src="./assets/icons/facebook-login.png" 
           alt="facebook-login"
           className="loginBtn"
         />
