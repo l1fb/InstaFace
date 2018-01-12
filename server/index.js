@@ -17,6 +17,7 @@ app.use(parser.urlencoded({extended: true}));
 app.use(morgan('tiny')); 
 
 app.use("/instaface", routes); 
+app.use("/file-upload", routes); 
 app.use(express.static(path.resolve(__dirname, '../client/public'))); 
 
 app.listen(PORT, () => {
