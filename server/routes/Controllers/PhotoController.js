@@ -8,21 +8,22 @@ const PhotoController = {
     createPhoto : ((req, res) => {
         //here, add photo to S3 and get photoURL
         //let photo_URL = req.body.photo_URL;
-        let photo_URL = 'http://imagizer.imageshack.com/img923/5938/lJOanw.jpg';
+        let photo_URL = req.body.photo_URL;
         let user_ID = req.body.user_ID;
         let caption = req.body.caption || null;
         let photo_ID = photo_URL.split('/')[3]; 
         firebaseDatabase.createPhoto(photo_ID, photo_URL, user_ID, caption);
-        recognizeFace.recognizeFace(photo_URL, (result) => {
-            let returnObj = {faceRectangle : result.faceRectangle}             
-            if (result.candidates && result.candidates[0].confidence > 0.50) {
-                returnObj.name = result.candidates[0].subject_id; 
-            }
-            else {
-                returnObj.name = "Anonomyous"
-            }
-            res.send(returnObj); 
-        }); 
+        // recognizeFace.recognizeFace(photo_URL, (result) => {
+        //     let returnObj = {faceRectangle : result.faceRectangle}             
+        //     if (result.candidates && result.candidates[0].confidence > 0.50) {
+        //         returnObj.name = result.candidates[0].subject_id; 
+        //     }
+        //     else {
+        //         returnObj.name = "Anonomyous"
+        //     }
+        //     res.send(returnObj); 
+        // }); 
+        res.send("it has been created");
     }),
 
     getAllPhotos : ((req, res) => {
@@ -32,8 +33,8 @@ const PhotoController = {
     }), 
 
     increaseLike : ((req, res) => {
-        firebaseDatabase.increaseLike(req.body.photo_URL);
-        // console.log("increaseLike routes responding!", req);
+        firebaseDatabase.increaseLike(req.body.photo_ID);
+        console.log("increaseLike routes responding!", req.body.photo_ID);
         res.send("Increased a Like! Spread the love..");
     }), 
 
