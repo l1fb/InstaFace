@@ -25,6 +25,6 @@ app.listen(PORT, () => {
     console.log("app is listening on port ", PORT); 
 })
 
-host.hostImage("/Users/diegoquintanal/Desktop/faceimage.jpg", function(response) {
+host.hostImage(path.resolve(__dirname, '../server/imagehosting/faceimage.jpg'), function(response) {
     console.log(response)
 });
