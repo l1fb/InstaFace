@@ -12,19 +12,19 @@ const PhotoController = {
         let photo = req.file.path;
         let photo_URL; 
         hostImage.hostImage(photo, (url) => {
-            photo_URL = url; 
-            console.log('url', url); 
+            photo_URL = url.imageUrl; 
+            console.log('url', photo_URL); 
+            recognizeFace.recognizeFace('http://' + photo_URL, (result) => {
+                let returnObj = {faceRectangle : result.faceRectangle}             
+                if (result.candidates && result.candidates[0].confidence > 0.50) {
+                    returnObj.name = result.candidates[0].subject_id; 
+                }
+                else {
+                    returnObj.name = "Anonomyous"
+                }
+                res.send(returnObj); 
+            });
         })
-        recognizeFace.recognizeFace(photo_URL, (result) => {
-            let returnObj = {faceRectangle : result.faceRectangle}             
-            if (result.candidates && result.candidates[0].confidence > 0.50) {
-                returnObj.name = result.candidates[0].subject_id; 
-            }
-            else {
-                returnObj.name = "Anonomyous"
-            }
-            res.send(returnObj); 
-        }); 
     }),
 
     getAllPhotos : ((req, res) => {
