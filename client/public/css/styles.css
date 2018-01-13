@@ -278,6 +278,15 @@ Search
   margin-right: 5px;
 }
 
+.noResults {
+  text-align: center;
+  margin-bottom: 100px;
+}
+
+.sadface {
+  opacity: 0.2;
+}
+
 
 /*
   ========================================

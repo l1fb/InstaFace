@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/Shivdp/instaface#readme",
   "dependencies": {
+    "FileReader": "^0.10.2",
     "axios": "^0.17.1",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
@@ -27,6 +28,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "body-parser": "^1.18.2",
+    "buffer-concat": "^1.0.0",
     "dotenv": "^4.0.0",
     "express": "^4.16.2",
     "firebase": "^4.8.1",
