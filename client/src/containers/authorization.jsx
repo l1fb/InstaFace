@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import fire from '../firebaseAuth';
 import setUser from '../reducers/setUser'
 import { changeName } from '../actions/index'
+import axios from 'axios'; 
 
 class Authorization extends Component {
   constructor(props) {
@@ -12,15 +13,24 @@ class Authorization extends Component {
     this.loginWithFacebook = this.loginWithFacebook.bind(this); 
     this.loginWithGoogle = this.loginWithGoogle.bind(this); 
     this.logOut = this.logOut.bind(this); 
+    this.createUser = this.createUser.bind(this); 
     fire.initFirebase(this.changeUser);
+  }
+
+  createUser() {
+    if (this.props.user.name.length > 0) {
+      axios.post('/instaface/users/createUser', this.props.user); 
+    } 
   }
 
   loginWithGoogle() {
     fire.signInWithGoogle(); 
+    this.createUser(); 
   }
 
   loginWithFacebook() {
     fire.signInWithFacebook(); 
+    this.createUser(); 
   }
 
   logOut() {
@@ -29,7 +39,7 @@ class Authorization extends Component {
 
   changeUser(user) {
     this.props.changeName(user); 
-    console.log('state user', this.props.user)
+    this.createUser(); 
   }
 
 
