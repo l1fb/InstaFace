@@ -2,18 +2,19 @@ const firebaseDatabase = require('../../firebaseDb');
 const detectFace = require('../../facerecofuncs/detect'); 
 const enrollFace = require('../../facerecofuncs/enroll');
 const recognizeFace = require('../../facerecofuncs/recognize'); 
+const hostImage = require('../../imagehosting/hosting');
+const FileReader = require('FileReader')
+var bufferjs = require('buffer-concat');
 
 const PhotoController = {
 
     createPhoto : ((req, res) => {
         let photo = req.file.path;
-        console.log('photo', photo)
-        //here, add photo to S3 and get photoURL
-        let photo_URL = req.body.photo_URL || 'http://cdn1.theodysseyonline.com/files/2016/02/12/635908929566546939-1088925658_Chandler%20bing2.jpg';
-        let user_ID = req.body.user_ID || '1234';
-        let caption = req.body.caption || null;
-        let photo_ID = photo_URL.split('/')[3]; 
-        firebaseDatabase.createPhoto(photo_ID, photo_URL, user_ID, caption);
+        let photo_URL; 
+        hostImage.hostImage(photo, (url) => {
+            photo_URL = url; 
+            console.log('url', url); 
+        })
         recognizeFace.recognizeFace(photo_URL, (result) => {
             let returnObj = {faceRectangle : result.faceRectangle}             
             if (result.candidates && result.candidates[0].confidence > 0.50) {
@@ -51,13 +52,14 @@ const PhotoController = {
     }),
 
     addPhotoTags : ((req, res) => {
-        let name = req.body.tag_name; 
-        let photo_ID = req.body.photo_ID; 
-        //let url = req.body.photo_URL
-        let url = 'http://imagizer.imageshack.com/img923/5938/lJOanw.jpg'; 
-        enrollFace.enrollFace(url, name, (bool) => {
+        let caption = req.body.caption; 
+        let user_ID = req.body.user_ID; 
+        let photo_URL = req.body.photo_URL; 
+        let photo_ID = photo_URL.split('/')[3]; 
+        firebaseDatabase.createPhoto(photo_ID, photo_URL, user_ID, caption);
+        enrollFace.enrollFace(photo_URL, name, (bool) => {
         if (bool) {
-                firebaseDatabase.addPhotoTags(req.body.photo_ID, req.body.tag_name);
+                firebaseDatabase.addPhotoTags(photo_ID, req.body.tag_name);
                 res.send('successfully added a tag on the photo');
             }
             else {

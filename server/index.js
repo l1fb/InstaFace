@@ -24,7 +24,3 @@ app.use(express.static(path.resolve(__dirname, '../client/public')));
 app.listen(PORT, () => {
     console.log("app is listening on port ", PORT); 
 })
-
-host.hostImage("/Users/diegoquintanal/Desktop/faceimage.jpg", function(response) {
-    console.log(response)
-});
