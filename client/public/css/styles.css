@@ -126,6 +126,7 @@ input {
 
 .logo {
   width: 275px;
+  cursor: pointer;
 }
 
 .auth {
