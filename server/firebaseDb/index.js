@@ -55,11 +55,12 @@ const getAllPhotos = (callback) => {
   })
 };
 
-const increaseLike = (photo_ID) => {
-  database.ref('/photos/' + photo_ID).child('likes').transaction((likes) => {
+const increaseLike = (photo_ID, callback) => {
+  database.ref('/photos/' + photo_ID).child('likes')
+  .transaction((likes) => {
     console.log("whats inside the increased like likes:", likes);
     return likes + 1;
-  });
+  })
 };
 
 const decreaseLike = (photo_ID) => {
@@ -113,6 +114,11 @@ const getPhotoByTag = (tag_name, callback) => {
   });
 };
 
+const addCaption = (photo_ID, caption) => {
+  database.ref(`/photos/${photo_ID}`).update({
+    caption: caption
+  });
+};
 // const getTagFromName = (first_name) => { //when they search for a name. type inthe name to get tag_ID so we can get all photos from that tag_ID
 //   //returns tag_ID
 // };
@@ -132,4 +138,4 @@ const getPhotoByTag = (tag_name, callback) => {
 
 
 
-module.exports = { createUser, createPhoto, increaseLike, decreaseLike, getPhotoInfo, getAllPhotos, addPhotoTags, getPhotoByTag };
+module.exports = { createUser, createPhoto, increaseLike, decreaseLike, getPhotoInfo, getAllPhotos, addPhotoTags, getPhotoByTag, addCaption };
