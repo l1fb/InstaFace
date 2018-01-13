@@ -10,6 +10,7 @@ const photos = (state=null, action) => {
 
     default: 
       return state;
+      break;
   };
 
   return state;
