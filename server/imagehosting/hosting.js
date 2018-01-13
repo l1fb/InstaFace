@@ -29,7 +29,7 @@ const hostImage = function (imageFileLink, callback) {
         callback(result)
     })
     .catch((error) => {
-        console.log("ERROR");
+        console.log("ERROR", error);
     })
 }
 

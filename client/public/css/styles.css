@@ -143,6 +143,20 @@ input {
   opacity: 0.75;
 }
 
+.logoutBtn {
+  height: 35px;
+  border: none;
+  color: white;
+  background-color: #26427e;
+  width: 100px;
+  cursor: pointer;
+  margin-left: 25px;
+}
+
+.logoutBtn:hover {
+  background-color: #172d5e;
+}
+
 
 /*
 ========================================
@@ -199,9 +213,12 @@ Search
   margin-bottom: 85px;
 }
 
+.fileUploader, .uploadTitle {
+  text-align: center;
+}
+
 .uploadTitle {
   margin-bottom: 35px;
-  text-align: center;
 }
 
 .line {
@@ -218,22 +235,6 @@ Search
   width: 300px;
 }
 
-.uploadBtn {
-  height: 48px;
-  border: none;
-  color: white;
-  background-color: #26427e;
-  width: 150px;
-  cursor: pointer;
-}
-
-.uploadBtn:hover {
-  background-color: #172d5e;
-}
-
-.fileUploader {
-  text-align: center;
-}
 
 .dropzone {
   text-align: center;
@@ -268,6 +269,7 @@ Search
 
 .likes {
   float: right;
+  cursor: pointer;
 }
 
 .likeHeart {
