@@ -3,8 +3,6 @@ const detectFace = require('../../facerecofuncs/detect');
 const enrollFace = require('../../facerecofuncs/enroll');
 const recognizeFace = require('../../facerecofuncs/recognize'); 
 const hostImage = require('../../imagehosting/hosting');
-const FileReader = require('FileReader')
-var bufferjs = require('buffer-concat');
 
 const PhotoController = {
 
@@ -52,6 +50,7 @@ const PhotoController = {
     }),
 
     addPhotoTags : ((req, res) => {
+        let faceRectangle = req.body.faceRectangle;
         let caption = req.body.caption; 
         let user_ID = req.body.user_ID; 
         let photo_URL = req.body.photo_URL; 
@@ -59,7 +58,7 @@ const PhotoController = {
         firebaseDatabase.createPhoto(photo_ID, photo_URL, user_ID, caption);
         enrollFace.enrollFace(photo_URL, name, (bool) => {
         if (bool) {
-                firebaseDatabase.addPhotoTags(photo_ID, req.body.tag_name);
+                firebaseDatabase.addPhotoTags(photo_ID, req.body.tag_name, faceRectangle);
                 res.send('successfully added a tag on the photo');
             }
             else {
