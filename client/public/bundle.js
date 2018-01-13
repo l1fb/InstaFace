@@ -42800,12 +42800,20 @@ var App = function (_Component) {
   function App(props) {
     _classCallCheck(this, App);
 
-    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+
+    _this.refreshFeed = _this.refreshFeed.bind(_this);
+    return _this;
   }
 
   _createClass(App, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
+      this.refreshFeed();
+    }
+  }, {
+    key: 'refreshFeed',
+    value: function refreshFeed() {
       var _this2 = this;
 
       _axios2.default.get('/instaface/photos/getAllPhotos').then(function (response) {
@@ -42820,9 +42828,12 @@ var App = function (_Component) {
         };
 
         var data = photosToDisplay(response.data);
-        console.log('this is the data', data);
 
-        _this2.props.initializeFeed(data);
+        var sortedData = data.sort(function (a, b) {
+          return b.likes - a.likes;
+        });
+
+        _this2.props.initializeFeed(sortedData);
       }).catch(function (err) {
         console.error('Failed to get all photos', err);
       });
@@ -42833,7 +42844,7 @@ var App = function (_Component) {
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(_header2.default, null),
+        _react2.default.createElement(_header2.default, { refreshFeed: this.refreshFeed }),
         _react2.default.createElement(_search2.default, null),
         _react2.default.createElement(_upload2.default, null),
         _react2.default.createElement(_feed2.default, null),
@@ -45682,7 +45693,7 @@ var _authorization2 = _interopRequireDefault(_authorization);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Header = function Header() {
+var Header = function Header(props) {
   return _react2.default.createElement(
     'div',
     { className: 'header' },
@@ -45692,7 +45703,8 @@ var Header = function Header() {
       _react2.default.createElement('img', {
         src: './assets/images/instaface-logo-new.png',
         alt: 'instagace-logo',
-        className: 'logo'
+        className: 'logo',
+        onClick: props.refreshFeed
       }),
       _react2.default.createElement(_authorization2.default, null)
     )
@@ -58110,9 +58122,10 @@ var Search = function (_Component) {
 
   _createClass(Search, [{
     key: 'searchSubmitHandler',
-    value: function searchSubmitHandler() {
+    value: function searchSubmitHandler(e) {
       var _this2 = this;
 
+      e.preventDefault();
       _axios2.default.get('/instaface/photos/getPhotoByTag', {
         params: {
           tag_name: this.state.searchInput
@@ -58134,6 +58147,9 @@ var Search = function (_Component) {
       }).catch(function (err) {
         console.error('Failed to search by tag', err);
       });
+
+      document.getElementsByClassName('searchInput')[0].value = ''; //.reset();
+      return false;
     }
   }, {
     key: 'onChangeHandler',
@@ -58151,24 +58167,30 @@ var Search = function (_Component) {
         _react2.default.createElement(
           'div',
           { className: 'container search' },
-          _react2.default.createElement('input', {
-            className: 'searchInput',
-            type: 'text',
-            name: 'search',
-            placeholder: 'Search...',
-            onChange: this.onChangeHandler
-          }),
           _react2.default.createElement(
-            'button',
+            'form',
             {
-              className: 'btn btn-lg searchBtn',
-              onClick: this.searchSubmitHandler
+              onSubmit: this.searchSubmitHandler
             },
-            _react2.default.createElement('img', {
-              src: './assets/icons/search-icon.png',
-              alt: 'search-icon',
-              className: 'searchIcon'
-            })
+            _react2.default.createElement('input', {
+              className: 'searchInput',
+              type: 'text',
+              name: 'search',
+              placeholder: 'Search...',
+              onChange: this.onChangeHandler
+            }),
+            _react2.default.createElement(
+              'button',
+              {
+                className: 'btn btn-lg searchBtn',
+                onClick: this.searchSubmitHandler
+              },
+              _react2.default.createElement('img', {
+                src: './assets/icons/search-icon.png',
+                alt: 'search-icon',
+                className: 'searchIcon'
+              })
+            )
           )
         )
       );
@@ -58290,6 +58312,8 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -58299,19 +58323,30 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var ConfirmTag = function (_Component) {
   _inherits(ConfirmTag, _Component);
 
-  function ConfirmTag() {
+  function ConfirmTag(props) {
     _classCallCheck(this, ConfirmTag);
 
-    return _possibleConstructorReturn(this, (ConfirmTag.__proto__ || Object.getPrototypeOf(ConfirmTag)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (ConfirmTag.__proto__ || Object.getPrototypeOf(ConfirmTag)).call(this, props));
+
+    _this.state = {
+      tagConfirmation: '',
+      captionInput: ''
+    };
+    return _this;
   }
 
   _createClass(ConfirmTag, [{
+    key: 'onChangeHandler',
+    value: function onChangeHandler(e) {
+      this.setState(_defineProperty({}, e.target.name, e.target.value));
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
         'div',
         null,
-        'ConfirmTag says hi'
+        'ConfirmTag says hi - display photo that was just uploaded - create an input field for tag confirmation - create an input field for caption'
       );
     }
   }]);

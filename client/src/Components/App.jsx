@@ -13,9 +13,15 @@ import Footer from './footer';
 class App extends Component {
   constructor(props) {
     super(props);
+
+    this.refreshFeed = this.refreshFeed.bind(this);
   }
 
   componentDidMount() {
+    this.refreshFeed();
+  }
+
+  refreshFeed() {
     axios.get('/instaface/photos/getAllPhotos')
       .then((response) => {
         const photosToDisplay = obj => {
@@ -29,9 +35,12 @@ class App extends Component {
         };
         
         const data = photosToDisplay(response.data);
-        console.log('this is the data', data);
 
-        this.props.initializeFeed(data);
+        const sortedData = data.sort((a, b) => {
+          return b.likes - a.likes;
+        });
+
+        this.props.initializeFeed(sortedData);
       })
       .catch((err) => {
         console.error('Failed to get all photos', err);
@@ -41,7 +50,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Header />
+        <Header refreshFeed={this.refreshFeed} />
         <Search />
         <Upload />
         <Feed />

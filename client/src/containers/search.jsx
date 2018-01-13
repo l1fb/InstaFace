@@ -16,7 +16,8 @@ class Search extends Component {
     this.searchSubmitHandler = this.searchSubmitHandler.bind(this);
   }
 
-  searchSubmitHandler() {
+  searchSubmitHandler(e) {
+    e.preventDefault();
     axios.get('/instaface/photos/getPhotoByTag', {
       params: {
         tag_name: this.state.searchInput
@@ -40,6 +41,9 @@ class Search extends Component {
       .catch((err) => {
         console.error('Failed to search by tag', err);
       });
+      
+    document.getElementsByClassName('searchInput')[0].value = '';//.reset();
+    return false;
   }
 
   onChangeHandler(e) {
@@ -52,28 +56,32 @@ class Search extends Component {
     return (
       <div className="searchContainer">
         <div className="container search">
-          <input 
-            className="searchInput"
-            type="text"
-            name="search"
-            placeholder="Search..."
-            onChange={this.onChangeHandler}
-          />
-          {/* <img 
-            src="./assets/images/search-btn.jpg"
-            alt="search-button"
-            className="searchBtn"
-          /> */}
-          <button 
-            className="btn btn-lg searchBtn"
-            onClick={this.searchSubmitHandler}
+          <form 
+            onSubmit={this.searchSubmitHandler}
           >
-            <img 
-              src="./assets/icons/search-icon.png" 
-              alt="search-icon"
-              className="searchIcon"
+            <input 
+              className="searchInput"
+              type="text"
+              name="search"
+              placeholder="Search..."
+              onChange={this.onChangeHandler}
             />
-          </button>
+            {/* <img 
+              src="./assets/images/search-btn.jpg"
+              alt="search-button"
+              className="searchBtn"
+            /> */}
+            <button 
+              className="btn btn-lg searchBtn"
+              onClick={this.searchSubmitHandler}
+            >
+              <img 
+                src="./assets/icons/search-icon.png" 
+                alt="search-icon"
+                className="searchIcon"
+              />
+            </button>
+          </form>
         </div>
       </div>
     );
