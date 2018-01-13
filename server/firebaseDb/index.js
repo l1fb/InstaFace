@@ -100,7 +100,7 @@ const getPhotoByTag = (tag_name, callback) => {
   database.ref('/photos/').orderByChild('time_stamp').once('value').then(function(snapshot) {
     let result = {};
     snapshot.forEach(function(childSnapshot) {
-      console.log("childsnapshot.val()", childSnapshot.val());
+      // console.log("childsnapshot.val()", childSnapshot.val());
       if (childSnapshot.val().tag_name) {
         if (childSnapshot.val().tag_name.first_name === searchName 
         ||  childSnapshot.val().tag_name.last_name === searchName
