@@ -51,4 +51,5 @@ module.exports.hostImage = hostImage;
 
 // If the file is to be pulled from a static location, use the following line:
 
-// "file@" : fs.createReadStream(__dirname + "/faceimage.jpg")
+// "file@" : fs.createReadStream(__dirname + "/faceimage.jpg") note that the last
+// part would need to be updated to reflect the name of the file. 
