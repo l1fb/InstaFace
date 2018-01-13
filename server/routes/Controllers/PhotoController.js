@@ -15,7 +15,8 @@ const PhotoController = {
             photo_URL = url.imageUrl; 
             console.log('url', photo_URL); 
             recognizeFace.recognizeFace('http://' + photo_URL, (result) => {
-                let returnObj = {faceRectangle : result.faceRectangle}             
+                let returnObj = {faceRectangle : result.faceRectangle}  
+                returnObj.photo_URL = photo_URL;            
                 if (result.candidates && result.candidates[0].confidence > 0.50) {
                     returnObj.name = result.candidates[0].subject_id; 
                 }
@@ -74,8 +75,8 @@ const PhotoController = {
     }), 
 
     addCaption : ((req, res) => {
-
-        firebaseDatabase.addCaption(req.body.photo_ID, req.body.caption)
+        let photo_ID = req.body.photo_URL.split('/')[3]; 
+        firebaseDatabase.addCaption(photo_ID, req.body.caption)
         res.status(202).send();
     })
 
