@@ -71,6 +71,12 @@ const PhotoController = {
           });
     }), 
 
+    addCaption : ((req, res) => {
+
+        firebaseDatabase.addCaption(req.body.photo_ID, req.body.caption)
+        res.status(202).send();
+    })
+
 }
 
 module.exports = PhotoController; 

@@ -5,7 +5,6 @@ const axios = require('axios');
 const request = require('request');
 const rp = require('request-promise');
 
-
 // See extensive documentation on how to use this function below. 
 
 const enrollFace = function (imageUrl, subjectId, callback) {

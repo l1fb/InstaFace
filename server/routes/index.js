@@ -32,6 +32,9 @@ router.route('/photos/addPhotoTags')
 router.route('/photos/getPhotoByTag')
   .get(PhotoController.getPhotoByTag)
 
+router.route('/photos/addCaption')
+  .put(PhotoController.addCaption)
+
 module.exports = router; 
 
 
