@@ -4,7 +4,6 @@ const enrollFace = require('../../facerecofuncs/enroll');
 const recognizeFace = require('../../facerecofuncs/recognize'); 
 const hostImage = require('../../imagehosting/hosting');
 const axios = require('axios'); 
-const BufferList = require("bufferlist").BufferList; 
 
 const PhotoController = {
 
@@ -36,7 +35,7 @@ const PhotoController = {
                 else {
                     returnObj.name = "Anonomyous"
                 }
-                res.status(201).send(returnObj); 
+                res.send(returnObj); 
             });
         })
     }),
@@ -55,7 +54,7 @@ const PhotoController = {
     decreaseLike : ((req, res) => {
         firebaseDatabase.decreaseLike(req.body.photo_URL);
         // console.log("decreaseLike routes responding!", req);
-        res.status(201).send("Decresased a Like :( why tho..");
+        res.send("Decresased a Like :( why tho..");
     }),
 
     getPhotoInfo : ((req, res) => {
@@ -82,10 +81,10 @@ const PhotoController = {
         enrollFace.enrollFace('http://' + photo_URL, req.body.tag_name, (bool) => {
         if (bool) {
                 firebaseDatabase.addPhotoTags(photo_ID, req.body.tag_name, faceRectangle);
-                res.status(201).send('successfully added a tag on the photo');
+                res.send('successfully added a tag on the photo');
             }
             else {
-                res.status(500).send('could not add tag on the photo')
+                res.send('could not add tag on the photo')
             }
         })
     }), 
@@ -99,7 +98,7 @@ const PhotoController = {
     addCaption : ((req, res) => {
         let photo_ID = req.body.photo_URL.split('/')[1]; 
         firebaseDatabase.addCaption(photo_ID, req.body.caption)
-        res.status(201).send();
+        res.status(202).send();
     })
 
 }
