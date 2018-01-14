@@ -9,7 +9,7 @@ const UserController = {
         let user_ID = req.body.user_ID;
         console.log("route is working correctly", req.body);
         firebaseDatabase.createUser(first_name, last_name, user_ID);
-        res.send(req.body);
+        res.status(201).send(req.body);
     }
 }
 
