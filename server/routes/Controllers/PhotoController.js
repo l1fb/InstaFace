@@ -9,10 +9,12 @@ const PhotoController = {
     createPhoto : ((req, res) => {
         let photo = req.file.path;
         let photo_URL; 
+        let user_ID = req.body.user_ID; 
         hostImage.hostImage(photo, (url) => {
             photo_URL = url.imageUrl; 
-            console.log('url', photo_URL); 
             recognizeFace.recognizeFace('http://' + photo_URL, (result) => {
+                let photo_ID = photo_URL.split('/')[1]; 
+                firebaseDatabase.createPhoto(photo_ID, photo_URL, user_ID);
                 let returnObj = {faceRectangle : result.faceRectangle}  
                 returnObj.photo_URL = photo_URL;            
                 if (result.candidates && result.candidates[0].confidence > 0.50) {
@@ -52,11 +54,9 @@ const PhotoController = {
     addPhotoTags : ((req, res) => {
         let faceRectangle = req.body.faceRectangle;
         let caption = req.body.caption; 
-        let user_ID = req.body.user_ID; 
         let photo_URL = req.body.photo_URL; 
-        let photo_ID = photo_URL.split('/')[3]; 
-        firebaseDatabase.createPhoto(photo_ID, photo_URL, user_ID, caption);
-        enrollFace.enrollFace(photo_URL, name, (bool) => {
+        let photo_ID = photo_URL.split('/')[1]; 
+        enrollFace.enrollFace('http://' + photo_URL, req.body.tag_name, (bool) => {
         if (bool) {
                 firebaseDatabase.addPhotoTags(photo_ID, req.body.tag_name, faceRectangle);
                 res.status(201).send('successfully added a tag on the photo');
@@ -74,7 +74,7 @@ const PhotoController = {
     }), 
 
     addCaption : ((req, res) => {
-        let photo_ID = req.body.photo_URL.split('/')[3]; 
+        let photo_ID = req.body.photo_URL.split('/')[1]; 
         firebaseDatabase.addCaption(photo_ID, req.body.caption)
         res.status(201).send();
     })
