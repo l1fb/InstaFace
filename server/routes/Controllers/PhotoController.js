@@ -99,6 +99,12 @@ const PhotoController = {
         let photo_ID = req.body.photo_URL.split('/')[1]; 
         firebaseDatabase.addCaption(photo_ID, req.body.caption)
         res.status(201).send();
+    }),
+
+    getPhotoByUserID : ((req, res) => {
+        firebaseDatabase.getPhotoByUserID(req.query.user_ID, function(photos) {
+            res.status(200).send(photos);  
+        });
     })
 
 }
