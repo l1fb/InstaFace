@@ -128,7 +128,7 @@ const getPhotoByUserID = (userID, callback) => {
         }
       }
     });
-    callback(searchName);
+    callback(result);
   });
 }
 

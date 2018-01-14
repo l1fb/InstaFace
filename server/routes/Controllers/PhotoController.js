@@ -102,7 +102,8 @@ const PhotoController = {
     }),
 
     getPhotoByUserID : ((req, res) => {
-        firebaseDatabase.getPhotoByUserID(req.query.user_ID, function(photos) {
+        console.log('this is headers', req.headers)
+        firebaseDatabase.getPhotoByUserID(req.headers.query, function(photos) {
             res.status(200).send(photos);  
         });
     })
