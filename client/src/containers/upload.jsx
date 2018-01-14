@@ -58,7 +58,7 @@ class Upload extends Component {
             <form
               action="/file-upload"
               className="dropzone"
-              id="fileDrop" 
+              id="fileDrop"
             ></form>
           </div>
         </div>

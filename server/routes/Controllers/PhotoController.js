@@ -24,7 +24,6 @@ const PhotoController = {
         
         hostImage.hostImage(photo, (url) => {
             photo_URL = url.imageUrl; 
-            // console.log('url', photo_URL); 
             recognizeFace.recognizeFace('http://' + photo_URL, (result) => {
                 let photo_ID = photo_URL.split('/')[1]; 
                 let returnObj = {faceRectangle : result.faceRectangle}  
@@ -35,9 +34,7 @@ const PhotoController = {
                 else {
                     returnObj.name = "Anonomyous"
                 }
-
-                // console.log(returnObj);
-                res.status(201).send(returnObj); 
+                res.send(returnObj); 
             });
         })
     }),
@@ -66,7 +63,6 @@ const PhotoController = {
     }),
 
     addPhotoTags : ((req, res) => {
-        let faceRectangle = req.body.faceRectangle;
         let caption = req.body.caption; 
         let photo_URL = req.body.photo_URL; 
         let photo_ID = photo_URL.split('/')[1]; 
@@ -83,7 +79,7 @@ const PhotoController = {
                 res.send('successfully added a tag on the photo');
             }
             else {
-                res.status(500).send('could not add tag on the photo')
+                res.send('could not add tag on the photo')
             }
         })
     }), 
