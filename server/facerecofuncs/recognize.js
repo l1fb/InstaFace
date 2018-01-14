@@ -39,7 +39,7 @@ const recognizeFace = function (imageUrl, callback) {
          
         rp(options)
             .then((parsedBody) => {
-                console.log("SUCCESS", parsedBody)
+                // console.log("SUCCESS", parsedBody)
                 returnObj.faceRectangle["topLeftX"] = parsedBody.images[0].transaction.topLeftX;
                 returnObj.faceRectangle["topLeftY"] = parsedBody.images[0].transaction.topLeftY;
                 returnObj.faceRectangle["width"] = parsedBody.images[0].transaction.width;

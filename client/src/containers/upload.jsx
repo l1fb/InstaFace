@@ -1,7 +1,21 @@
 import React, { Component } from 'react';
 import ConfirmTag from './confirmTag';
+import Dropzone from '../../public/dropzone';
 
 class Upload extends Component {
+  constructor(props) {
+    super(props);
+
+    Dropzone.autoDiscover = false;
+  }
+
+  componentDidMount() {
+    const myDropzone = new Dropzone(".dropzone", { url: '/file-upload' });
+    
+    myDropzone.on('success', (file, res) => {
+      console.log('Face successfully sent to FR API', res);
+    })
+  }
 
   render() {
     return (
@@ -22,20 +36,10 @@ class Upload extends Component {
           </div>
 
           <div className="fileUploader">
-            {/* <input
-              name="file"
-              placeholder="Select a file to upload"
-              className="uploadInput"
-            />
-            <button
-              className="uploadBtn"
-            >
-              Upload File
-            </button> */}
             <form
               action="/file-upload"
               className="dropzone"
-              id="fileDrop"
+              id="fileDrop" 
             ></form>
           </div>
         </div>
