@@ -146,10 +146,11 @@ input {
 
 .logoutBtn {
   height: 35px;
+  border-radius: 3px;
   border: none;
   color: white;
   background-color: #26427e;
-  width: 100px;
+  width: 125px;
   cursor: pointer;
   margin-left: 25px;
 }
@@ -211,7 +212,7 @@ Search
 */
 
 .uploadWrapper {
-  margin-bottom: 85px;
+  margin-bottom: 25px;
 }
 
 .fileUploader, .uploadTitle {
@@ -251,12 +252,33 @@ Search
 
 /*
   ========================================
+  Confirmation Modal
+  ========================================
+*/
+
+.confirmBtn {
+  height: 40px;
+  border: none;
+  color: white;
+  background-color: #26427e;
+  width: 150px;
+  cursor: pointer;
+}
+
+.confirmBtn:hover {
+  background-color: #172d5e;
+}
+
+
+/*
+  ========================================
   Feed
   ========================================
 */
 
 .feedWrapper {
   margin-bottom: 35px;
+  margin-top: 85px;
 }
 
 .photoEntry {

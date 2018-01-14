@@ -3,8 +3,6 @@ const detectFace = require('../../facerecofuncs/detect');
 const enrollFace = require('../../facerecofuncs/enroll');
 const recognizeFace = require('../../facerecofuncs/recognize'); 
 const hostImage = require('../../imagehosting/hosting');
-const FileReader = require('FileReader')
-var bufferjs = require('buffer-concat');
 
 const PhotoController = {
 
@@ -22,11 +20,12 @@ const PhotoController = {
 
     createPhoto : ((req, res) => {
         let photo = req.file.path;
-        let photo_URL; 
+        let photo_URL;
+        
         hostImage.hostImage(photo, (url) => {
             photo_URL = url.imageUrl; 
-            // console.log('url', photo_URL); 
             recognizeFace.recognizeFace('http://' + photo_URL, (result) => {
+                let photo_ID = photo_URL.split('/')[1]; 
                 let returnObj = {faceRectangle : result.faceRectangle}  
                 returnObj.photo_URL = photo_URL;            
                 if (result.candidates && result.candidates[0].confidence > 0.50) {
@@ -35,9 +34,7 @@ const PhotoController = {
                 else {
                     returnObj.name = "Anonomyous"
                 }
-
-                // console.log(returnObj);
-                res.status(201).send(returnObj); 
+                res.send(returnObj); 
             });
         })
         recognizeFace.recognizeFace(photo_URL, (result) => {
@@ -77,13 +74,18 @@ const PhotoController = {
 
     addPhotoTags : ((req, res) => {
         let caption = req.body.caption; 
-        let user_ID = req.body.user_ID; 
         let photo_URL = req.body.photo_URL; 
-        let photo_ID = photo_URL.split('/')[3]; 
-        firebaseDatabase.createPhoto(photo_ID, photo_URL, user_ID, caption);
-        enrollFace.enrollFace(photo_URL, name, (bool) => {
+        let photo_ID = photo_URL.split('/')[1]; 
+        let user_ID; 
+        if (user_ID) {
+            user_ID = req.body.user_ID;
+        } else {
+            user_ID = 'anon'
+        }
+        firebaseDatabase.createPhoto(photo_ID, photo_URL, user_ID);
+        enrollFace.enrollFace('http://' + photo_URL, req.body.tag_name, (bool) => {
         if (bool) {
-                firebaseDatabase.addPhotoTags(photo_ID, req.body.tag_name);
+                firebaseDatabase.addPhotoTags(photo_ID, req.body.tag_name, req.body.face_Rectangle);
                 res.send('successfully added a tag on the photo');
             }
             else {
