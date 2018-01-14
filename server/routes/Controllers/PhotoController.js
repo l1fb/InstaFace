@@ -58,7 +58,7 @@ const PhotoController = {
     }),
 
     getPhotoInfo : ((req, res) => {
-        firebaseDatabase.getPhotoInfo(req.headers.query, function(photoInfo) {
+        firebaseDatabase.getPhotoInfo(req.query.photo_URL, function(photoInfo) {
             res.status(200).send(photoInfo);
           })
     }),
