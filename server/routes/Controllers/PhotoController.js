@@ -3,6 +3,7 @@ const detectFace = require('../../facerecofuncs/detect');
 const enrollFace = require('../../facerecofuncs/enroll');
 const recognizeFace = require('../../facerecofuncs/recognize'); 
 const hostImage = require('../../imagehosting/hosting');
+const axios = require('axios');
 
 const PhotoController = {
 
