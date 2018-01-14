@@ -3,6 +3,7 @@ const detectFace = require('../../facerecofuncs/detect');
 const enrollFace = require('../../facerecofuncs/enroll');
 const recognizeFace = require('../../facerecofuncs/recognize'); 
 const hostImage = require('../../imagehosting/hosting');
+const axios = require('axios');
 
 const PhotoController = {
 
@@ -37,6 +38,16 @@ const PhotoController = {
                 res.send(returnObj); 
             });
         })
+        recognizeFace.recognizeFace(photo_URL, (result) => {
+            let returnObj = {faceRectangle : result.faceRectangle}             
+            if (result.candidates && result.candidates[0].confidence > 0.50) {
+                returnObj.name = result.candidates[0].subject_id; 
+            }
+            else {
+                returnObj.name = "Anonomyous"
+            }
+            res.send(returnObj); 
+        }); 
     }),
 
     getAllPhotos : ((req, res) => {
