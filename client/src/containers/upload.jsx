@@ -1,7 +1,40 @@
 import React, { Component } from 'react';
 import ConfirmTag from './confirmTag';
+import Dropzone from '../../public/dropzone';
 
 class Upload extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      uploaded: false
+    };
+
+    Dropzone.autoDiscover = false;
+
+    this.componentDidMount = this.componentDidMount.bind(this);
+    this.toggleUploaded = this.toggleUploaded.bind(this);
+  }
+  
+  getUserID() {
+    console.log(this.props.user.user_ID);
+    return this.props.user.user_ID;
+  }
+
+  componentDidMount() {
+    const myDropzone = new Dropzone(".dropzone", { url: '/file-upload' });
+    
+    myDropzone.on('success', (file, res) => {
+      console.log('Face successfully sent to FR API', res);
+      this.toggleUploaded();
+    });
+  }
+
+  toggleUploaded() {
+    this.setState({
+      uploaded: !this.state.uploaded
+    });
+  }
 
   render() {
     return (
@@ -22,16 +55,6 @@ class Upload extends Component {
           </div>
 
           <div className="fileUploader">
-            {/* <input
-              name="file"
-              placeholder="Select a file to upload"
-              className="uploadInput"
-            />
-            <button
-              className="uploadBtn"
-            >
-              Upload File
-            </button> */}
             <form
               action="/file-upload"
               className="dropzone"
@@ -39,6 +62,15 @@ class Upload extends Component {
             ></form>
           </div>
         </div>
+
+        {
+          !this.state.uploaded ? null :
+          <div className="container">
+            <ConfirmTag 
+              toggleUploaded={this.toggleUploaded}
+            />
+          </div>
+        }
       </div>
     );
   }
