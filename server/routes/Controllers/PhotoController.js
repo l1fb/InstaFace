@@ -35,6 +35,8 @@ const PhotoController = {
                 else {
                     returnObj.name = "Anonomyous"
                 }
+
+                console.log(returnObj);
                 res.status(201).send(returnObj); 
             });
         })
