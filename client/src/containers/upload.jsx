@@ -6,7 +6,19 @@ class Upload extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      uploaded: false
+    };
+
     Dropzone.autoDiscover = false;
+
+    this.componentDidMount = this.componentDidMount.bind(this);
+    this.toggleUploaded = this.toggleUploaded.bind(this);
+  }
+  
+  getUserID() {
+    console.log(this.props.user.user_ID);
+    return this.props.user.user_ID;
   }
 
   componentDidMount() {
@@ -14,7 +26,14 @@ class Upload extends Component {
     
     myDropzone.on('success', (file, res) => {
       console.log('Face successfully sent to FR API', res);
-    })
+      this.toggleUploaded();
+    });
+  }
+
+  toggleUploaded() {
+    this.setState({
+      uploaded: !this.state.uploaded
+    });
   }
 
   render() {
@@ -39,10 +58,19 @@ class Upload extends Component {
             <form
               action="/file-upload"
               className="dropzone"
-              id="fileDrop" 
+              id="fileDrop"
             ></form>
           </div>
         </div>
+
+        {
+          !this.state.uploaded ? null :
+          <div className="container">
+            <ConfirmTag 
+              toggleUploaded={this.toggleUploaded}
+            />
+          </div>
+        }
       </div>
     );
   }

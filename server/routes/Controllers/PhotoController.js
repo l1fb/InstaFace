@@ -3,7 +3,6 @@ const detectFace = require('../../facerecofuncs/detect');
 const enrollFace = require('../../facerecofuncs/enroll');
 const recognizeFace = require('../../facerecofuncs/recognize'); 
 const hostImage = require('../../imagehosting/hosting');
-const axios = require('axios'); 
 
 const PhotoController = {
 
@@ -25,7 +24,6 @@ const PhotoController = {
         
         hostImage.hostImage(photo, (url) => {
             photo_URL = url.imageUrl; 
-            // console.log('url', photo_URL); 
             recognizeFace.recognizeFace('http://' + photo_URL, (result) => {
                 let photo_ID = photo_URL.split('/')[1]; 
                 let returnObj = {faceRectangle : result.faceRectangle}  
@@ -36,9 +34,7 @@ const PhotoController = {
                 else {
                     returnObj.name = "Anonomyous"
                 }
-
-                // console.log(returnObj);
-                res.status(201).send(returnObj); 
+                res.send(returnObj); 
             });
         })
     }),
@@ -71,20 +67,17 @@ const PhotoController = {
         let caption = req.body.caption; 
         let photo_URL = req.body.photo_URL; 
         let photo_ID = photo_URL.split('/')[1]; 
-
         let user_ID; 
         if (user_ID) {
             user_ID = req.body.user_ID;
         } else {
             user_ID = 'anon'
         }
-
         firebaseDatabase.createPhoto(photo_ID, photo_URL, user_ID);
-
         enrollFace.enrollFace('http://' + photo_URL, req.body.tag_name, (bool) => {
         if (bool) {
-                firebaseDatabase.addPhotoTags(photo_ID, req.body.tag_name, faceRectangle);
-                res.status(201).send('successfully added a tag on the photo');
+                firebaseDatabase.addPhotoTags(photo_ID, req.body.tag_name, req.body.face_Rectangle);
+                res.send('successfully added a tag on the photo');
             }
             else {
                 res.status(500).send('could not add tag on the photo')
