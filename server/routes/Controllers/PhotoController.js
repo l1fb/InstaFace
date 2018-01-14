@@ -24,6 +24,7 @@ const PhotoController = {
         
         hostImage.hostImage(photo, (url) => {
             photo_URL = url.imageUrl; 
+            // console.log('url', photo_URL); 
             recognizeFace.recognizeFace('http://' + photo_URL, (result) => {
                 let photo_ID = photo_URL.split('/')[1]; 
                 let returnObj = {faceRectangle : result.faceRectangle}  
@@ -35,7 +36,7 @@ const PhotoController = {
                     returnObj.name = "Anonomyous"
                 }
 
-                console.log(returnObj);
+                // console.log(returnObj);
                 res.status(201).send(returnObj); 
             });
         })
