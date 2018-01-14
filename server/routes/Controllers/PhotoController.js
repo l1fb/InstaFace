@@ -65,6 +65,7 @@ const PhotoController = {
     }),
 
     addPhotoTags : ((req, res) => {
+        let faceRectangle = req.body.faceRectangle;
         let caption = req.body.caption; 
         let photo_URL = req.body.photo_URL; 
         let photo_ID = photo_URL.split('/')[1]; 
@@ -80,7 +81,7 @@ const PhotoController = {
 
         enrollFace.enrollFace('http://' + photo_URL, req.body.tag_name, (bool) => {
         if (bool) {
-                firebaseDatabase.addPhotoTags(photo_ID, req.body.tag_name, req.body.faceRectangle);
+                firebaseDatabase.addPhotoTags(photo_ID, req.body.tag_name, faceRectangle);
                 res.send('successfully added a tag on the photo');
             }
             else {
