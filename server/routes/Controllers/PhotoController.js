@@ -35,7 +35,9 @@ const PhotoController = {
                 else {
                     returnObj.name = "Anonomyous"
                 }
-                res.send(returnObj); 
+
+                // console.log(returnObj);
+                res.status(201).send(returnObj); 
             });
         })
         recognizeFace.recognizeFace(photo_URL, (result) => {
@@ -87,10 +89,10 @@ const PhotoController = {
         enrollFace.enrollFace('http://' + photo_URL, req.body.tag_name, (bool) => {
         if (bool) {
                 firebaseDatabase.addPhotoTags(photo_ID, req.body.tag_name, req.body.face_Rectangle);
-                res.send('successfully added a tag on the photo');
+                res.status(202).send('successfully added a tag on the photo');
             }
             else {
-                res.send('could not add tag on the photo')
+                res.status(500).send('could not add tag on the photo')
             }
         })
     }), 
