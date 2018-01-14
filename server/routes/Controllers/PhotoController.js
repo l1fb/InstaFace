@@ -99,6 +99,17 @@ const PhotoController = {
         let photo_ID = req.body.photo_URL.split('/')[1]; 
         firebaseDatabase.addCaption(photo_ID, req.body.caption)
         res.status(201).send();
+    }),
+
+    getPhotoByUserID : ((req, res) => {
+        console.log('this is headers', req.headers)
+        firebaseDatabase.getPhotoByUserID(req.query.user_ID, function(photos) {
+                                    //if req.query.user_ID does not work,
+                                    //it would depend on how you are sending the
+                                    //GET request. I do it little bit differently
+                                    //than u guys i think. :)
+            res.status(200).send(photos);  
+        });
     })
 
 }

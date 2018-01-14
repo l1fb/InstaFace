@@ -117,6 +117,21 @@ const getPhotoByTag = (tag_name, callback) => {
   });
 };
 
+const getPhotoByUserID = (userID, callback) => {
+  
+  database.ref('/photos/').orderByChild('time_stamp').once('value').then(function(snapshot) {
+    let result = {};
+    snapshot.forEach(function(childSnapshot) {
+      if (childSnapshot.val().user_ID) {
+        if (childSnapshot.val().user_ID === userID) {
+          result[childSnapshot.key] = childSnapshot.val();
+        }
+      }
+    });
+    callback(result);
+  });
+}
+
 const addCaption = (photo_ID, caption) => {
   database.ref(`/photos/${photo_ID}`).update({
     caption: caption
@@ -141,4 +156,4 @@ const addCaption = (photo_ID, caption) => {
 
 
 
-module.exports = { createUser, createPhoto, increaseLike, decreaseLike, getPhotoInfo, getAllPhotos, addPhotoTags, getPhotoByTag, addCaption };
+module.exports = { createUser, createPhoto, increaseLike, decreaseLike, getPhotoInfo, getAllPhotos, addPhotoTags, getPhotoByTag, addCaption, getPhotoByUserID };

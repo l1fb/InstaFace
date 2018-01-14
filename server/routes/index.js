@@ -35,6 +35,9 @@ router.route('/photos/getPhotoByTag')
 router.route('/photos/addCaption')
   .put(PhotoController.addCaption)
 
+router.route('/photos/getPhotoByUserID')
+  .get(PhotoController.getPhotoByUserID)
+  
 module.exports = router; 
 
 
