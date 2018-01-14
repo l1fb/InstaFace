@@ -12,6 +12,8 @@ const detect = require('./facerecofuncs/detect.js');
 const enroll = require('./facerecofuncs/enroll.js');
 const recon = require('./facerecofuncs/recognize.js');
 const host = require('./imagehosting/hosting.js');
+const PhotoController = require('./routes/Controllers/PhotoController'); 
+
 
 app.use(parser.json()); 
 app.use(parser.urlencoded({extended: true})); 
@@ -19,6 +21,8 @@ app.use(morgan('tiny'));
 
 app.use("/instaface", routes); 
 app.use("/file-upload", routes); 
+app.use("/imagizer.imageshack.com", (PhotoController.getPhoto)); 
+
 app.use(express.static(path.resolve(__dirname, '../client/public'))); 
 
 app.listen(PORT, () => {
