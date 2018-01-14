@@ -78,7 +78,7 @@ const getPhotoInfo = (photo_URL, callback) => { //from '/photos' collection, ret
   });
 };
 
-const addPhotoTags = (photo_ID, tagName) => { // combines
+const addPhotoTags = (photo_ID, tagName, faceRectangle) => { // combines
   //update a specific photo_URL with the tag_name
   let fullName = tagName.toLowerCase();
   let splitName = fullName.split(' ');
@@ -91,6 +91,9 @@ const addPhotoTags = (photo_ID, tagName) => { // combines
     full_name: fullName,
     first_name: firstName,
     last_name: lastName
+  });
+  database.ref('/photos/' + photo_ID).update({
+    faceRectangle: faceRectangle
   });
 };
 

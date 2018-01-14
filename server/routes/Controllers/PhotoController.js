@@ -23,7 +23,7 @@ const PhotoController = {
                 else {
                     returnObj.name = "Anonomyous"
                 }
-                res.send(returnObj); 
+                res.status(201).send(returnObj); 
             });
         })
     }),
@@ -42,7 +42,7 @@ const PhotoController = {
     decreaseLike : ((req, res) => {
         firebaseDatabase.decreaseLike(req.body.photo_URL);
         // console.log("decreaseLike routes responding!", req);
-        res.send("Decresased a Like :( why tho..");
+        res.status(201).send("Decresased a Like :( why tho..");
     }),
 
     getPhotoInfo : ((req, res) => {
@@ -52,16 +52,17 @@ const PhotoController = {
     }),
 
     addPhotoTags : ((req, res) => {
+        let faceRectangle = req.body.faceRectangle;
         let caption = req.body.caption; 
         let photo_URL = req.body.photo_URL; 
         let photo_ID = photo_URL.split('/')[1]; 
         enrollFace.enrollFace('http://' + photo_URL, req.body.tag_name, (bool) => {
         if (bool) {
-                firebaseDatabase.addPhotoTags(photo_ID, req.body.tag_name, req.body.face_Rectangle);
-                res.send('successfully added a tag on the photo');
+                firebaseDatabase.addPhotoTags(photo_ID, req.body.tag_name, faceRectangle);
+                res.status(201).send('successfully added a tag on the photo');
             }
             else {
-                res.send('could not add tag on the photo')
+                res.status(500).send('could not add tag on the photo')
             }
         })
     }), 
@@ -75,7 +76,7 @@ const PhotoController = {
     addCaption : ((req, res) => {
         let photo_ID = req.body.photo_URL.split('/')[1]; 
         firebaseDatabase.addCaption(photo_ID, req.body.caption)
-        res.status(202).send();
+        res.status(201).send();
     })
 
 }
