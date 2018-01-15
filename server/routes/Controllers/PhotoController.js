@@ -24,6 +24,8 @@ const PhotoController = {
         hostImage.hostImage(photo, (url) => {
             photo_URL = url.imageUrl; 
             recognizeFace.recognizeFace('http://' + photo_URL, (result) => {
+
+                let photo_ID = photo_URL.split('/')[1]; 
                 let returnObj = {faceRectangle : result.faceRectangle}  
                 returnObj.photo_URL = photo_URL;            
                 if (result.candidates && result.candidates[0].confidence > 0.50) {
