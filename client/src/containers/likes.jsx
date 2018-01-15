@@ -10,8 +10,6 @@ class Likes extends Component {
       count: props.count
     };
 
-    console.log('this is the id', props.id);
-
     this.fillHeart = this.fillHeart.bind(this);
     this.emptyHeart = this.emptyHeart.bind(this);
     this.increaseLike = this.increaseLike.bind(this);

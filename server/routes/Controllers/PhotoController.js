@@ -60,12 +60,7 @@ const PhotoController = {
         let caption = req.body.caption; 
         let photo_URL = req.body.photo_URL; 
         let photo_ID = photo_URL.split('/')[1]; 
-        let user_ID; 
-        if (user_ID) {
-            user_ID = req.body.user_ID;
-        } else {
-            user_ID = 'anon'
-        }
+        let user_ID = req.body.user_ID || 'Anonymous';
         firebaseDatabase.createPhoto(photo_ID, photo_URL, user_ID);
         enrollFace.enrollFace('http://' + photo_URL, req.body.tag_name, (bool) => {
         if (bool) {
