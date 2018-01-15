@@ -11,13 +11,20 @@ class ConfirmTag extends Component {
       captionInput: ''
     };
 
-    this.onChangeHandler = this.onChangeHandler.bind(this);
+    this.onTagChangeHandler = this.onTagChangeHandler.bind(this);
+    this.onCaptionChangeHandler = this.onCaptionChangeHandler.bind(this);
     this.confirmHandler = this.confirmHandler.bind(this);
   }
 
-  onChangeHandler(e) {
+  onTagChangeHandler(e) {
     this.setState({
-      [e.target.name]: e.target.value
+      tagConfirmation: e.target.value
+    });
+  }
+
+  onCaptionChangeHandler(e) {
+    this.setState({
+      captionInput: e.target.value
     });
   }
 
@@ -102,16 +109,16 @@ class ConfirmTag extends Component {
                       <input 
                         type="text" 
                         placeholder="Enter Full Name" 
-                        onChange={this.onChangeHandler} 
-                        className="modalInput"
+                        onChange={this.onTagChangeHandler} 
+                        className="modalInputTagName, modalInput"
                         required
                       />
                       :
                       <input 
                         type="text" 
                         defaultValue={this.props.activePhoto.tagPrediction} 
-                        onChange={this.onChangeHandler} 
-                        className="modalInput"
+                        onChange={this.onTagChangeHandler} 
+                        className="modalInputTagName, modulInput"
                         required
                       />
                     }
@@ -122,8 +129,8 @@ class ConfirmTag extends Component {
                     <input 
                       type="text" 
                       placeholder="Enter Caption" 
-                      onChange={this.onChangeHandler} 
-                      className="modalInput"
+                      onChange={this.onCaptionChangeHandler} 
+                      className="modalInputCaption, modalInput"
                       required
                     />
                   </div>
