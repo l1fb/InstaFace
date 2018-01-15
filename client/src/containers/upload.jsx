@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import setActivePhoto from '../actions/setActivePhoto';
 import ConfirmTag from './confirmTag';
 import Dropzone from '../../public/dropzone';
 
@@ -26,6 +30,13 @@ class Upload extends Component {
     
     myDropzone.on('success', (file, res) => {
       console.log('Face successfully sent to FR API', res);
+
+      this.props.setActivePhoto({
+        faceRectangle: res.faceRectangle,
+        tagPrediction: res.name,
+        photo_URL: res.photo_URL
+      });
+
       this.toggleUploaded();
     });
   }
@@ -68,6 +79,7 @@ class Upload extends Component {
           <div className="container">
             <ConfirmTag 
               toggleUploaded={this.toggleUploaded}
+              refreshFeed={this.props.refreshFeed}
             />
           </div>
         }
@@ -76,4 +88,10 @@ class Upload extends Component {
   }
 }
 
-export default Upload;
+const matchDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    setActivePhoto: setActivePhoto
+  }, dispatch);
+};
+
+export default connect(null, matchDispatchToProps)(Upload);

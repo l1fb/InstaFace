@@ -52,7 +52,7 @@ class App extends Component {
       <div>
         <Header refreshFeed={this.refreshFeed} />
         <Search />
-        <Upload />
+        <Upload refreshFeed={this.refreshFeed}/>
         <Feed />
         <Footer />
       </div>
