@@ -19,11 +19,6 @@ class Upload extends Component {
     this.componentDidMount = this.componentDidMount.bind(this);
     this.toggleUploaded = this.toggleUploaded.bind(this);
   }
-  
-  getUserID() {
-    console.log(this.props.user.user_ID);
-    return this.props.user.user_ID;
-  }
 
   componentDidMount() {
     const myDropzone = new Dropzone(".dropzone", { url: '/file-upload' });

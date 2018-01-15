@@ -2,11 +2,6 @@ import React, { Component } from 'react';
 import Likes from './likes';
 
 class FeedEntry extends Component {
-  constructor(props) {
-    super(props);
-    console.log('am i getting photos', props.photo);
-  }
-
   render() {
     return (
       <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12 photoWrapper">

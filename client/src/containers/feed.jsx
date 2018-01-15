@@ -4,7 +4,6 @@ import FeedEntry from './feedEntry';
 
 class Feed extends Component {
   render() {
-    console.log('this is the photos', this.props.photos);
     return (
       !this.props.photos ? null
       :

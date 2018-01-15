@@ -263,6 +263,7 @@ Search
   background-color: #26427e;
   width: 150px;
   cursor: pointer;
+  margin-bottom: 15px;
 }
 
 .confirmBtn:hover {
@@ -283,10 +284,6 @@ Search
 
 .modalInputContainer {
   margin-bottom: 25px;
-  text-align: center;
-}
-
-.modalFooter {
   text-align: center;
 }
 

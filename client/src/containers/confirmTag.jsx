@@ -16,7 +16,6 @@ class ConfirmTag extends Component {
   }
 
   onChangeHandler(e) {
-    console.log(e.target.value);
     this.setState({
       [e.target.name]: e.target.value
     });
@@ -38,15 +37,22 @@ class ConfirmTag extends Component {
     // this.props.photo_URL
 
     axios.put('/instaface/photos/addPhotoTags', {
-      caption: this.state.captionInput,
       photo_URL: this.props.activePhoto.photo_URL,
       faceRectangle: this.props.activePhoto.faceRectangle,
       tag_name: this.state.tagConfirmation,
       user_ID: this.props.user.user_ID
     })
       .then(() => {
-        // ADD MORE LOGIC?
-        this.props.refreshFeed();
+        axios.put('/instaface/photos/addCaption', {
+          photo_URL: this.props.activePhoto.photo_URL,
+          caption: this.state.captionInput
+        })
+          .then(() => {
+            this.props.refreshFeed();
+          })
+          .catch((err) => {
+            console.error('Failed to add caption', err);
+          })
       })
       .catch((err) => {
         console.error('Error adding photo data', err);
@@ -88,49 +94,54 @@ class ConfirmTag extends Component {
                   className="modalImage"
                 />
 
-                <div className="modalInputContainer">
-                  Confirm Tag:
-                  {
-                    (!this.props.activePhoto.tagPrediction || this.props.activePhoto.tagPrediction === 'Anonomyous') ?
+                <form>
+                  <div className="modalInputContainer">
+                    Confirm Tag:
+                    {
+                      (!this.props.activePhoto.tagPrediction || this.props.activePhoto.tagPrediction === 'Anonomyous') ?
+                      <input 
+                        type="text" 
+                        placeholder="Enter Full Name" 
+                        onChange={this.onChangeHandler} 
+                        className="modalInput"
+                        required
+                      />
+                      :
+                      <input 
+                        type="text" 
+                        defaultValue={this.props.activePhoto.tagPrediction} 
+                        onChange={this.onChangeHandler} 
+                        className="modalInput"
+                        required
+                      />
+                    }
+                  </div>
+
+                  <div className="modalInputContainer">
+                    <p>Add a caption:</p>
                     <input 
                       type="text" 
-                      placeholder="Enter Full Name" 
+                      placeholder="Enter Caption" 
                       onChange={this.onChangeHandler} 
                       className="modalInput"
+                      required
                     />
-                    :
-                    <input 
-                      type="text" 
-                      defaultValue={this.props.activePhoto.tagPrediction} 
-                      onChange={this.onChangeHandler} 
-                      className="modalInput"
-                    />
-                  }
-                </div>
+                  </div>
 
-                <div className="modalInputContainer">
-                  <p>Add a caption:</p>
-                  <input 
-                    type="text" 
-                    placeholder="Enter Caption" 
-                    onChange={this.onChangeHandler} 
-                    className="modalInput"
-                  />
-                </div>
-              </div>
-              
-              <div className="modal-footer">
-                <button 
-                  type="button" 
-                  className="btn btn-primary confirmBtn"
-                  data-toggle="modal" 
-                  data-target="#exampleModalLong"
-                  onClick={this.confirmHandler}
-                >
-                  Confirm
-                </button>
-              </div>
+                  <div className="modalInputContainer">
+                    <button 
+                      type="button" 
+                      className="btn btn-primary confirmBtn"
+                      data-toggle="modal" 
+                      data-target="#exampleModalLong"
+                      onClick={this.confirmHandler}
+                    >
+                      Confirm
+                    </button>
+                  </div>
+                </form>
 
+              </div>
             </div>
           </div>
         </div>
