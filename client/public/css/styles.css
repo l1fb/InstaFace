@@ -269,6 +269,27 @@ Search
   background-color: #172d5e;
 }
 
+.modalImage {
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+.modalInput {
+  width: 100%;
+  margin-top: 10px;
+  padding-left: 15px;
+  height: 50px;
+}
+
+.modalInputContainer {
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.modalFooter {
+  text-align: center;
+}
+
 
 /*
   ========================================

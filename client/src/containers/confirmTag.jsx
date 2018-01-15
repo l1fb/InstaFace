@@ -13,8 +13,6 @@ class ConfirmTag extends Component {
 
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.confirmHandler = this.confirmHandler.bind(this);
-
-    console.log('confirmTags props', this.props.activePhoto)
   }
 
   onChangeHandler(e) {
@@ -87,32 +85,40 @@ class ConfirmTag extends Component {
                 <img 
                   src={this.props.activePhoto.photo_URL} 
                   alt=""
+                  className="modalImage"
                 />
 
-                <p>Confirm Tag:</p>
-                {
-                  (!this.props.activePhoto.tagPrediction || this.props.activePhoto.tagPrediction === 'Anonomyous') ?
-                  <input 
-                    type="text" 
-                    placeholder="Enter Full Name" 
-                    onChange={this.onChangeHandler} 
-                  />
-                  :
-                  <input 
-                    type="text" 
-                    defaultValue={this.props.activePhoto.tagPrediction} 
-                    onChange={this.onChangeHandler} 
-                  />
-                }
+                <div className="modalInputContainer">
+                  Confirm Tag:
+                  {
+                    (!this.props.activePhoto.tagPrediction || this.props.activePhoto.tagPrediction === 'Anonomyous') ?
+                    <input 
+                      type="text" 
+                      placeholder="Enter Full Name" 
+                      onChange={this.onChangeHandler} 
+                      className="modalInput"
+                    />
+                    :
+                    <input 
+                      type="text" 
+                      defaultValue={this.props.activePhoto.tagPrediction} 
+                      onChange={this.onChangeHandler} 
+                      className="modalInput"
+                    />
+                  }
+                </div>
 
-                <p>Add a caption:</p>
-                <input 
-                  type="text" 
-                  placeholder="Enter Caption" 
-                  onChange={this.onChangeHandler} 
-                />
+                <div className="modalInputContainer">
+                  <p>Add a caption:</p>
+                  <input 
+                    type="text" 
+                    placeholder="Enter Caption" 
+                    onChange={this.onChangeHandler} 
+                    className="modalInput"
+                  />
+                </div>
               </div>
-
+              
               <div className="modal-footer">
                 <button 
                   type="button" 
